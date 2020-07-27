@@ -1,10 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}Digifix - Service Portal{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}">
 </head>
 <body>
+{% include 'partials/header.html' %}
+{% block content %}
 
+{% endblock %}
+{% include 'partials/footer.html' %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.backtotop.js' %}"></script>
+<script src="{% static 'js/jquery.mobilemenu.js' %}"></script>
 </body>
 </html>
