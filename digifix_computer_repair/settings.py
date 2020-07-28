@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup',
+    'widget_tweaks',
     'accounts',
     'complaints'
 ]
@@ -120,6 +122,9 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/dashboard'
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

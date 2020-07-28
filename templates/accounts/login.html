@@ -1,0 +1,40 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}
+    Digifix - Login
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+  <main class="hoc container clear">
+      {% if messages %}
+        {% for message in messages %}
+            <div class="center alert-info {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    <h1>USER LOGIN</h1>
+    <div class="content">
+      <div id="comments">
+        <p>Please create an account or login with existing account to register service requests pertaining to
+        your electronic appliances. </p>
+        <form action="" method="post">
+        {% csrf_token %}
+         <div class="block">
+            <label for="username">Your Username</label>
+            <input type="text" name="username" id="username" value="" size="22" required>
+          </div>
+          <div class="block">
+            <label for="password">Your Password</label>
+            <input type="password" name="password" id="password" value="" size="22">
+          </div>
+          <div class="block">
+            <input type="submit" name="submit" value="Submit Form">
+            <input type="reset" name="reset" value="Reset Form">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+{% endblock %}

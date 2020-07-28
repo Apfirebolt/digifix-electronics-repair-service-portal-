@@ -1,12 +1,15 @@
 {% extends 'partials/base.html' %}
-
+{% load static %}
 {% block title %}
     Digifix - Complete electronix solutions
 {% endblock %}
 
 {% block content %}
 
-<!-- Intro section -->
+
+
+<div class="overlay" style="background-image:url('../static/images/backgrounds/Automn.jpg');">
+
   <div id="pageintro" class="hoc clear">
     <article>
       <h3 class="heading">Digifix - Offering Digital solutions since 2002</h3>
@@ -15,7 +18,43 @@
       <footer><a class="btn" href="#">Customers valued, 100% satisfaction guaranteed!</a></footer>
     </article>
   </div>
-<!-- Intro ends here -->
+  <!-- Intro ends here -->
+</div>
+
+<div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/04.png');">
+  <div class="hoc container testimonials clear">
+    <article><img src={% static 'images/backgrounds/Automn.jpg' %} alt="" >
+      <blockquote>Ridiculus mus nunc ut nisi sit amet tellus aliquam aliquet suspendisse sit amet lacus a felis sagittis fringilla at et nibh donec placerat luctus nisi nec malesuada.</blockquote>
+      <h6 class="heading font-x1">E. Doe</h6>
+      <em>Parturient montes nascetur</em></article>
+  </div>
+</div>
+
+<div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/02.png');">
+  <div class="hoc container clear">
+    <!-- ################################################################################################ -->
+    <div class="sectiontitle">
+      <h6 class="heading">Laoreet dolor etiam</h6>
+    </div>
+    <div class="group">
+      <div class="two_third first">
+        <p><strong>Orci dignissim placerat quisque</strong></p>
+        <p>Odio in accumsan in finibus lacus vitae condimentum dignissim urna est auctor ante eget viverra ex ex non enim fusce vitae leo eleifend rutrum nisl sit amet congue ligula ut vulputate hendrerit nisl ut condimentum duis.</p>
+        <p class="btmspace-30">Luctus quam ut est aliquam et ultricies nisl vulputate donec in luctus arcu maecenas nec metus ac magna posuere [&hellip;]</p>
+        <footer><a class="btn" href="#">Read More &raquo;</a></footer>
+      </div>
+      <div class="one_third">
+        <p><strong>Malesuada congue pulvinar</strong></p>
+        <figure class="videocontainer">
+          <!-- Important: Any type of video called via "iframe" must be in a container using class="videocontainer" -->
+          <iframe src="https://www.youtube-nocookie.com/embed/8Z9089048wk?modestbranding=1&amp;showinfo=0&amp;vq=hd1080&amp;rel=0&amp;wmode=transparent" allowfullscreen style="border:none;"></iframe>
+          <figcaption>What our satisfied customers say about us!</figcaption>
+        </figure>
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+  </div>
+</div>
 
 <div class="wrapper row3">
   <div class="hoc container clear">

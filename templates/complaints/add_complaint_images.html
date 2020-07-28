@@ -1,0 +1,42 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Add Complaint Images
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>You are adding images for an already existing request.</h1>
+    <div class="content">
+      <div id="comments">
+        <p>You can add up to two images at a time.</p>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for each_form in image_formset %}
+                <form class="form_container" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ each_form.image_description }}
+                {{ each_form.gadget_image }}
+                {% if each_form.errors %}
+                  <ul>
+                    {% for key,value in each_form.errors.items %}
+                      <li>{{ value|escape }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+                </form>
+                {% endfor %}
+                <div class="block">
+                    <input type="submit" name="submit" value="Submit Form">
+                    <input type="reset" name="reset" value="Reset Form">
+                </div>
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}

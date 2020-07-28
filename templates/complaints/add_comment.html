@@ -1,0 +1,39 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Add Comment
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>POST COMMENT</h1>
+    <div class="content">
+      <div id="comments">
+        <p>You are about to post a comment related an open service request.</p>
+
+        <form class="form_container" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+           {{ form.description.label }}
+           {{ form.description }}
+
+        <div class="button_container">
+            <input type="submit" name="submit" value="Submit Form">
+            <input type="reset" name="reset" value="Reset Form">
+        </div>
+        {% if form.errors %}
+          <ul>
+            {% for key,value in form.errors.items %}
+              <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}

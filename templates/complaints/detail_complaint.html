@@ -1,0 +1,50 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}
+    Complaints Page
+{% endblock %}
+
+{% block content %}
+<div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
+background-size:cover;">
+
+  <div id="pageintro" class="hoc clear">
+    <article class="service_request_container">
+      <h3 class="heading">Service Request Detail</h3>
+      <p>{{ complaint.description }}</p>
+      <p>This service request is related to a <span class="highlight">{{ complaint.device_type }}</span></p>
+      <p class="highlight">SERVICE STATUS IS {{ complaint.status }}</p>
+      <p class="sub_title">{{ complaint.status_text }}</p>
+      <div class="button_container">
+          <button><a href={% url 'complaints:complaint_update' pk=complaint.id %}>Update</a></button>
+          <button><a href={% url 'complaints:add_images' pk=complaint.id %}>Add Images</a></button>
+          {% if complaint.status_text %}
+          <button><a href={% url 'complaints:add_comment' pk=complaint.id %}>Add Comment</a></button>
+          {% endif %}
+      </div>
+    </article>
+   <div class="comments">
+        <h2 align="center">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
+        <ul>
+          {% for each_comment in complaint.all_thread_comments.all %}
+          <li>
+            <article>
+              <header>
+                <figure class="avatar"><img src="{{ each_comment.written_by.profile_image.url }}" alt=""></figure>
+                <address>
+                By <a href="#">{{ each_comment.written_by.username }}</a>
+                </address>
+                <p>Posted at {{ each_comment.posted_at }}</p>
+              </header>
+              <div class="content">
+                <p>{{ each_comment.description }}</p>
+              </div>
+            </article>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+  </div>
+  <!-- Intro ends here -->
+</div>
+{% endblock %}

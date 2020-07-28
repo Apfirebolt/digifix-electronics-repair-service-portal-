@@ -5,5 +5,77 @@
 {% endblock %}
 
 {% block content %}
-<h1>Dashboard Page - Accounts</h1>
+<div class="wrapper row3">
+  <main class="hoc container clear">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="center alert-info {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+   <h1>Dashboard</h1>
+   <p>Hey there {{ request.user.username }}, it seems that you haven't added any address yet! Why not add one
+  now ?</p>
+      <img src="{{ request.user.profile_image.url }}" height="400" width="300" alt="Profile Image not available" >
+      {% if request.user.complaints_created.all %}
+      <h3>Status of your applications</h3>
+      <div class="scrollable">
+        <table>
+          <thead>
+            <tr>
+              <th>Created At</th>
+              <th>Device Type</th>
+              <th>Status</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for each_request in request.user.complaints_created.all %}
+              <tr>
+                  <td>{{ each_request.created_at }}</td>
+                  <td>{{ each_request.device_type }}</td>
+                  <td>{{ each_request.status }}</td>
+                  <td>
+                      <button><a href={% url 'complaints:complaint_detail' pk=each_request.id %}>View Details</a></button>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <h3>Hey {{ request.user.username }}, It seems you have no service requests to keep track of.</h3>
+      {% endif %}
+      {% if request.user.all_addresses.all %}
+      <h3>Addresses which you've added!</h3>
+
+      <div class="scrollable">
+        <table>
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Primary</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for each_address in request.user.all_addresses.all %}
+              <tr>
+                  <td>{{ each_address.address }}</td>
+                  <td>{{ each_address.is_primary }}</td>
+                  <td>
+                      <button><a href={% url 'complaints:address_update' pk=each_address.id %}>Edit</a></button>
+                      <button><a href={% url 'complaints:address_delete' pk=each_address.id %}>Delete</a></button>
+                  </td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+          <h3>It seems you've added any address yet!</h3>
+      {% endif %}
+
+  </main>
+</div>
+
 {% endblock %}

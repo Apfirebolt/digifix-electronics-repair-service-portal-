@@ -1,0 +1,36 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}
+    View All Addresses
+{% endblock %}
+
+{% block content %}
+<div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
+background-size:cover;">
+
+  <div id="pageintro" class="hoc clear">
+    <article>
+      <h4 class="heading">Hey {{ request.user.username }}, Your Addresses</h4>
+        {% for each_address in all_addresses %}
+            <div class="address_container">
+                <div>
+                    <p>
+                        {{ each_address.address }}
+                    </p>
+                    {% if each_address.is_primary %}
+                    <p>
+                        Primary Address
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="button_container">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        {% endfor %}
+    </article>
+  </div>
+  <!-- Intro ends here -->
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Digifix - Update Account Settings
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>CHANGE ACCOUNT SETTINGS</h1>
+    <div class="content">
+      <div id="comments">
+        <p>You are modifying your existing account settings, you can change your username, password, email and
+        profile picture too.</p>
+
+
+        <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for each_field in form %}
+            {{ each_field.label }}
+            {{ each_field|add_class:"block" }}
+       {% endfor %}
+
+        <div class="button_container">
+            <input type="submit" name="submit" value="Update Settings">
+            <input type="reset" name="reset" value="Reset Form">
+        </div>
+        {% if form.errors %}
+          <ul>
+            {% for key,value in form.errors.items %}
+              <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <h2>{{ form.errors }}</h2>
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+{% endblock %}

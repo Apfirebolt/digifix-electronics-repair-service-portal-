@@ -1,0 +1,32 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Add Service Requests
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>All Service Requests and their status listed below</h1>
+    <div class="content">
+        {% for each_request in all_requests %}
+            <div class="request_container">
+                <p>
+                    {{ each_request.description }}
+                </p>
+                <p>{{ each_request.device_type }}</p>
+            <p>{{ each_request.status }}</p>
+            <span>{{ each_request.created_at }}</span>
+                <div class="button_container">
+                    <button>Edit</button>
+                    <button>View Thread</button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}
