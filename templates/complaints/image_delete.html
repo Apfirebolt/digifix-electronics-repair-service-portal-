@@ -1,0 +1,28 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Delete Single Image
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>DELETE SINGLE IMAGE</h1>
+    <main class="hoc container clear">
+        <h1>Confirm deletion of a image uploaded!</h1>
+        <div class="content">
+          <div id="comments">
+            <form method="post">{% csrf_token %}
+                <p>Are you sure you want to delete your uploaded image "{{ object.image_description }}"?</p>
+                <input type="submit" value="Confirm">
+            </form>
+          </div>
+        </div>
+        <div class="clear"></div>
+    </main>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}

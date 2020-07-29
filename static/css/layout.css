@@ -1441,6 +1441,22 @@ button a:hover {
     display: flex;
 }
 
+.image_container .button_container button {
+    margin: 0.5rem;
+    background-color: #0E76A8;
+    padding: 0.5rem;
+    box-radius: 5x;
+    border: none;
+    min-width: 120px;
+    color: #FFF;
+    box-shadow: 1px 1px 1px #0E76A8;
+}
+
+#comments .image_container {
+    padding: 1rem;
+    border: 1px solid #FFF;
+}
+
 /* Other
 --------------------------------------------------------------------------------------------------------------- */
 @media screen and (max-width:650px){

@@ -1,0 +1,26 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Image Detail
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>SINGLE IMAGE DETAIL</h1>
+    <div class="content">
+      <div id="comments">
+          <div class="image_container">
+              <img  alt="Image Not available" src={{ complaint_image.gadget_image.url }}>
+          </div>
+          <p>
+              {{ complaint_image.image_description }}
+          </p>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}

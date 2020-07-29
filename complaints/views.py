@@ -18,6 +18,12 @@ class DetailComplaintView(DetailView):
   context_object_name = 'complaint'
   template_name = 'complaints/detail_complaint.html'
 
+  def get_object(self, queryset=None):
+    currentObj = super(DetailComplaintView, self).get_object()
+    if currentObj.created_by_id != self.request.user.id:
+      raise Http404("You are not authorized to view this page")
+    return currentObj
+
 
 class UpdateComplaintView(LoginRequiredMixin, UpdateView):
   template_name = 'complaints/update_complaint.html'
@@ -215,6 +221,49 @@ class UpdateTestimonial(UpdateView):
     if currentObj.written_by_id != self.request.user.id:
       raise Http404("You are not authorized to view this page")
     return currentObj
+
+
+class SingleImageDetail(DetailView):
+  model = ComplaintImages
+  context_object_name = 'complaint_image'
+  template_name = 'complaints/image_detail.html'
+
+  def get_object(self, queryset=None):
+    currentObj = super(SingleImageDetail, self).get_object()
+    if currentObj.related_complaint.created_by_id != self.request.user.id:
+      raise Http404("You are not authorized to view this page")
+    return currentObj
+
+
+class SingleImageDelete(DeleteView):
+  model = ComplaintImages
+  template_name = 'complaints/image_delete.html'
+
+  def get_object(self, queryset=None):
+    currentObj = super(SingleImageDelete, self).get_object()
+    if currentObj.related_complaint.created_by_id != self.request.user.id:
+      raise Http404("You are not authorized to view this page")
+    return currentObj
+
+  def get_success_url(self):
+    parentObjId = self.get_object().related_complaint.id
+    return reverse_lazy('complaints:complaint_detail', kwargs={'pk': parentObjId})
+
+
+class SingleImageUpdate(UpdateView):
+  model = ComplaintImages
+  form_class = ComplaintImageForm
+  template_name = 'complaints/image_update.html'
+
+  def get_object(self, queryset=None):
+    currentObj = super(SingleImageUpdate, self).get_object()
+    if currentObj.related_complaint.created_by_id != self.request.user.id:
+      raise Http404("You are not authorized to view this page")
+    return currentObj
+
+  def get_success_url(self):
+    parentObjId = self.get_object().related_complaint.id
+    return reverse('complaints:complaint_detail', kwargs={'pk': parentObjId})
 
 
 def complaints_view(request):

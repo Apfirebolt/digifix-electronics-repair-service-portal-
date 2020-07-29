@@ -1,11 +1,10 @@
-from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from digifix_computer_repair import settings
 from . views import ( complaints_view, CreateComplaintView, DetailComplaintView, AddAddress,
                       AllUserAddresses, AllServiceRequests, UpdateAddressView, DeleteAddressView
                       ,UpdateComplaintView, AddRequestImages, AddNewComment, CreateTestimonial, UpdateTestimonial,
-                      ListTestimonials, DeleteTestimonial, )
+                      ListTestimonials, DeleteTestimonial, SingleImageDelete, SingleImageUpdate, SingleImageDetail )
 
 
 urlpatterns = [
@@ -24,6 +23,9 @@ urlpatterns = [
     path('create_testimonial', CreateTestimonial.as_view(), name='create_testimonial'),
     path('update_testimonial/<int:pk>', UpdateTestimonial.as_view(), name='update_testimonial'),
     path('delete_testimonial/<int:pk>', DeleteTestimonial.as_view(), name='delete_testimonial'),
+    path('image_delete/<int:pk>', SingleImageDelete.as_view(), name='image_delete'),
+    path('image_update/<int:pk>', SingleImageUpdate.as_view(), name='image_update'),
+    path('image_detail/<int:pk>', SingleImageDetail.as_view(), name='image_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -37,14 +37,15 @@ background-size:cover;">
                           <img src="{{ each_image.gadget_image.url }}" alt="Image Not available">
                           <p>{{ each_image.image_description }}</p>
                       </figure>
+                      <div class="button_container">
+                          <button><a href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a></button>
+                          <button><a href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a></button>
+                          <button><a href={% url 'complaints:image_detail' pk=each_image.id %}>View</a></button>
+                      </div>
                     {% endfor %}
 
                 </div>
               </section>
-          </div>
-
-          <div class="image_container">
-
           </div>
           {% else %}
           <h2>No image has been uploaded for this service request!</h2>
