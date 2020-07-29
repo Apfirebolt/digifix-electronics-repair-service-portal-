@@ -13,8 +13,7 @@
         {% endfor %}
     {% endif %}
    <h1>Dashboard</h1>
-   <p>Hey there {{ request.user.username }}, it seems that you haven't added any address yet! Why not add one
-  now ?</p>
+   <p>Hey there {{ request.user.username }}, welcome to the dashboard!</p>
       <img src="{{ request.user.profile_image.url }}" height="400" width="300" alt="Profile Image not available" >
       {% if request.user.complaints_created.all %}
       <h3>Status of your applications</h3>
@@ -74,7 +73,10 @@
       {% else %}
           <h3>It seems you've added any address yet!</h3>
       {% endif %}
-
+      <p>
+          If you have availed our services then why not leave a review ? ,<a href={% url 'complaints:create_testimonial' %}>
+          Leave a review here</a>
+      </p>
   </main>
 </div>
 
