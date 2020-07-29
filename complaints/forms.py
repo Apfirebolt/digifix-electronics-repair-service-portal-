@@ -1,5 +1,5 @@
 from django import forms
-from . models import Complaint, ComplaintImages, UserAddress, Comments
+from . models import Complaint, ComplaintImages, UserAddress, Comments, UserTestimonials
 from django.core.validators import FileExtensionValidator
 
 
@@ -36,3 +36,10 @@ class AddCommentForm(forms.ModelForm):
   class Meta:
     model = Comments
     fields = ('description',)
+
+
+class TestimonialForm(forms.ModelForm):
+
+  class Meta:
+    model = UserTestimonials
+    fields = ('content', 'service_rating',)

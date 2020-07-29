@@ -14,7 +14,8 @@ background-size:cover;">
       <p>{{ complaint.description }}</p>
       <p>This service request is related to a <span class="highlight">{{ complaint.device_type }}</span></p>
       <p class="highlight">SERVICE STATUS IS {{ complaint.status }}</p>
-      <p class="sub_title">{{ complaint.status_text }}</p>
+      <p class="sub_title">{{ complaint.status_text }} Your reference ID is
+          <span class="highlight">{{ complaint.reference_id }}</span></p>
       <div class="button_container">
           <button><a href={% url 'complaints:complaint_update' pk=complaint.id %}>Update</a></button>
           <button><a href={% url 'complaints:add_images' pk=complaint.id %}>Add Images</a></button>
@@ -23,6 +24,32 @@ background-size:cover;">
           {% endif %}
       </div>
     </article>
+
+      {% if complaint.all_images.all %}
+          <div class="wrapper row3">
+              <section class="hoc container clear">
+                <div class="sectiontitle">
+                  <h6 class="heading">All Images</h6>
+                </div>
+                <div class="image_container">
+                    {% for each_image in complaint.all_images.all %}
+                      <figure class="one_third first">
+                          <img src="{{ each_image.gadget_image.url }}" alt="Image Not available">
+                          <p>{{ each_image.image_description }}</p>
+                      </figure>
+                    {% endfor %}
+
+                </div>
+              </section>
+          </div>
+
+          <div class="image_container">
+
+          </div>
+          {% else %}
+          <h2>No image has been uploaded for this service request!</h2>
+      {% endif %}
+
    <div class="comments">
         <h2 align="center">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
         <ul>

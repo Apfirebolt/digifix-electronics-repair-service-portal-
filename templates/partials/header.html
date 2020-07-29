@@ -17,7 +17,7 @@
           <li><a href={% url 'complaints:create_request' %}>Request Service</a></li>
           <li><a href={% url 'accounts:settings' %}>Change Settings</a></li>
           <li><a href={% url 'complaints:add_address' %}>Add Address</a></li>
-          <li><a href="pages/full-width.html">View Testimonials</a></li>
+          <li><a href={% url 'complaints:all_testimonials' %}>View Testimonials</a></li>
          </ul>
         </li>
      {% endif %}

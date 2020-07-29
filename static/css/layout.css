@@ -846,7 +846,7 @@ input:focus, textarea:focus, *:required:focus {
 
 .overlay {
 	color:#FFFFFF;
-	background-color:green;
+	background-color:lightgray;
 }
 
 .overlay::after {
@@ -1213,7 +1213,7 @@ button a:hover {
 }
 
 .comments ul li {
-    background-color: #FFF;
+    background-color: #CCC;
     color: #0E76A8;
     padding: 0.5rem;
     margin: 1rem auto;
@@ -1254,6 +1254,55 @@ button a:hover {
     padding: 0.5rem;
 }
 
+.image_container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-around;
+    padding: 1rem;
+    margin: 1.5rem auto;
+}
+
+.image_container figure img {
+    height: auto;
+    width: auto;
+    border: 1px solid black;
+    max-height: 300px;
+    max-width: 300px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.image_container p {
+    font-size: 1rem;
+    color: #0E76A8;
+}
+
+.image_container figure:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.testimonial_container {
+    background: transparent;
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin: 1.5rem auto;
+}
+
+.testimonial_container:hover {
+    background: transparent;
+    box-shadow: none;
+    border: 1px solid coral;
+    cursor: pointer;
+}
+
+.rating_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
 /* Media Queries
 --------------------------------------------------------------------------------------------------------------- */
@@ -1375,7 +1424,7 @@ button a:hover {
     align-items: center;
 }
 
-.request_container .button_container button {
+.request_container .button_container button, .testimonial_container .button_container button {
     background-color: #0E76A8;
     color: #FFF;
     padding: 1rem;
@@ -1386,6 +1435,10 @@ button a:hover {
     box-shadow: 1px 1px 1px #0E76A8;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.testimonial_container .button_container {
+    display: flex;
 }
 
 /* Other

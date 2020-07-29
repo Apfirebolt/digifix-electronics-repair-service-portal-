@@ -1,0 +1,41 @@
+{% extends 'partials/base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+    Update Testimonial
+{% endblock %}
+
+{% block content %}
+<div class="wrapper overlay row3">
+    <main class="hoc container clear">
+    <h1>UPDATE TESTIMONIAL</h1>
+    <div class="content">
+      <div id="comments">
+        <p>You are updating a review you earlier wrote about us!</p>
+
+        <form class="form_container" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field.label }}
+            {{ field }}
+        {% endfor %}
+
+        <div class="button_container">
+            <input type="submit" name="submit" value="Submit Form">
+            <input type="reset" name="reset" value="Reset Form">
+        </div>
+        {% if form.errors %}
+          <ul>
+            {% for key,value in form.errors.items %}
+              <li>{{ value|escape }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        </form>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </main>
+</div>
+
+
+{% endblock %}

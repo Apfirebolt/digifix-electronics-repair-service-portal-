@@ -20,6 +20,8 @@ DEVICE_TYPE_CHOICES =(
     ("Others", "Others"),
 )
 
+RATING_CHOICES = [(i,i) for i in range(6)]
+
 
 class Complaint(models.Model):
   created_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='complaints_created')
@@ -89,3 +91,15 @@ class UserAddress(models.Model):
   class Meta:
     verbose_name_plural = "User Addresses"
 
+
+class UserTestimonials(models.Model):
+  written_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_testimonial')
+  content = models.TextField("Testimonial Content")
+  posted_at = models.DateTimeField(auto_now=True)
+  service_rating = models.IntegerField("Service Ratings", choices=RATING_CHOICES, null=True, blank=True)
+
+  def __str__(self):
+    return str(self.written_by.username) + ' - ' + str(self.content)
+
+  class Meta:
+    verbose_name_plural = "User Testimonials"
