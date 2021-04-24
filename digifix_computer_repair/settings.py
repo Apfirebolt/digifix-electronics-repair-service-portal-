@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'digifix_computer_repair.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'digifix',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',   # Or an IP Address that your DB is hosted on
+        'PASSWORD': 'pass12345',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '5432',
     }
 }
