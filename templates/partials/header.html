@@ -1,27 +1,34 @@
-<header id="header" class="hoc clear">
-  <!-- ################################################################################################ -->
-  <div id="logo" class="fl_left">
-    <h1><a href="index.html">Digifix Solutions</a></h1>
-  </div>
-  <nav id="mainav" class="fl_right">
-    <ul class="clear">
-      <li class="active"><a href={% url 'home' %}>About Us</a></li>
-     {% if not request.user.is_authenticated %}
-        <li><a href={% url 'accounts:register' %}><i class="fa fa-user"></i>Sign Up</a></li>
-        <li><a href={% url 'accounts:login' %}><i class="fa fa-sign-in"></i>Sign In</a></li>
-         {% else %}
-        <li><a href={% url 'accounts:dashboard' %}>Dashboard</a></li>
-        <li><a href={% url 'accounts:logout' %}><i class="fa fa-sign-out"></i>Logout</a></li>
-        <li><a class="drop" href="#">Options</a>
-         <ul>
-          <li><a href={% url 'complaints:create_request' %}>Request Service</a></li>
-          <li><a href={% url 'accounts:settings' %}>Change Settings</a></li>
-          <li><a href={% url 'complaints:add_address' %}>Add Address</a></li>
-          <li><a href={% url 'complaints:all_testimonials' %}>View Testimonials</a></li>
-         </ul>
+<nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
+  <a href="index.html" class="navbar-brand" href="#">
+    <h1>Digifix Solutions</h1>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      {% if not request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href={% url 'accounts:register' %}><i class="fa fa-user"></i>Sign Up</a>
         </li>
-     {% endif %}
+        <li class="nav-item">
+          <a href={% url 'accounts:login' %}><i class="fa fa-sign-in"></i>Sign In</a>
+        </li>
+      
+      {% else %}
+      <li class="nav-item">
+        <a href={% url 'complaints:create_request' %}>Request Service</a>
+      </li>
+      <li class="nav-item">
+        <a href={% url 'accounts:settings' %}>Change Settings</a>
+      </li>
+      <li class="nav-item">
+        <a href={% url 'complaints:add_address' %}>Add Address</a>
+      </li>
+      <li class="nav-item">
+        <a href={% url 'complaints:all_testimonials' %}>View Testimonials</a>
+      </li>
+      {% endif %}
     </ul>
-  </nav>
-
-</header>
+  </div>
+</nav>

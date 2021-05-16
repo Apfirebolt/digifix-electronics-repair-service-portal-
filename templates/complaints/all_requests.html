@@ -5,12 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
+<div class="container">
     <h1>All Service Requests and their status listed below</h1>
     <div class="content">
         {% for each_request in all_requests %}
-            <div class="request_container">
+            <div class="bg-white p-3">
                 <p>
                     {{ each_request.description }}
                 </p>
@@ -24,8 +23,6 @@
             </div>
         {% endfor %}
     </div>
-    <div class="clear"></div>
-  </main>
 </div>
 
 

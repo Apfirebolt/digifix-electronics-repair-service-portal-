@@ -6,37 +6,29 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
-    <h1>USER REGISTRATION</h1>
-    <div class="content">
-      <div id="comments">
-        <p>Please create an account or login with existing account to register service requests pertaining to
-        your electronic appliances. </p>
+<div class="auth-form">
+  <h3 class="text-center">USER REGISTRATION</h3>
+  <p>Please create an account or login with existing account to register service requests pertaining to
+    your electronic appliances. </p>
 
-
-        <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for each_field in form %}
-            {{ each_field.label }}
-            {{ each_field|add_class:"block" }}
-       {% endfor %}
-        <div class="button_container">
-            <input type="submit" name="submit" value="Submit Form">
-            <input type="reset" name="reset" value="Reset Form">
-        </div>
-        {% if form.errors %}
-          <ul>
-            {% for key,value in form.errors.items %}
-              <li>{{ value|escape }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
-        <h2>{{ form.errors }}</h2>
-        </form>
-      </div>
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for each_field in form %}
+        {{ each_field.label }}
+        {{ each_field|add_class:"form-group" }}
+   {% endfor %}
+    <div class="container d-flex justify-content-center">
+        <input type="submit" class="m-1 btn btn-success" name="submit" value="Submit Form">
+        <input type="reset" class="m-1 btn btn-danger" name="reset" value="Reset Form">
     </div>
-    <div class="clear"></div>
-  </main>
+    {% if form.errors %}
+      <ul>
+        {% for key,value in form.errors.items %}
+          <li>{{ value|escape }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    <h2>{{ form.errors }}</h2>
+  </form> 
 </div>
 {% endblock %}

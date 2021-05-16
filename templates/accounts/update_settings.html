@@ -6,26 +6,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
-    <h1>CHANGE ACCOUNT SETTINGS</h1>
+<div class="container">
+    <h3 class="text-center my-3 text-success">CHANGE ACCOUNT SETTINGS</h3>
     <div class="content">
       <div id="comments">
-        <p>You are modifying your existing account settings, you can change your username, password, email and
+        <p class="text-center">You are modifying your existing account settings, you can change your username, password, email and
         profile picture too.</p>
 
 
-        <form action="" method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data" class="auth-form">
+
         {% csrf_token %}
+          {% for each_field in form %}
+              {{ each_field.label }}
+              {{ each_field|add_class:"form-group" }}
+          {% endfor %}
 
-        {% for each_field in form %}
-            {{ each_field.label }}
-            {{ each_field|add_class:"block" }}
-       {% endfor %}
-
-        <div class="button_container">
-            <input type="submit" name="submit" value="Update Settings">
-            <input type="reset" name="reset" value="Reset Form">
+        <div class="my-2 d-flex justify-content-center align-item-center">
+            <input type="submit" name="submit" class="btn btn-success m-1" value="Update Settings">
+            <input type="reset" name="reset" class="btn btn-danger m-1" value="Reset Form">
         </div>
         {% if form.errors %}
           <ul>
@@ -38,7 +37,5 @@
         </form>
       </div>
     </div>
-    <div class="clear"></div>
-  </main>
 </div>
 {% endblock %}

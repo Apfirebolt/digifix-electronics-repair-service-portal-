@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Digifix - Service Portal{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Nunito&family=PT+Sans&family=Roboto&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/aos/aos.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
 <body>
 {% include 'partials/header.html' %}
@@ -13,8 +18,10 @@
 
 {% endblock %}
 {% include 'partials/footer.html' %}
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/jquery.backtotop.js' %}"></script>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/aos/aos.js' %}"></script>
 <script src="{% static 'js/jquery.mobilemenu.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
 </body>
 </html>

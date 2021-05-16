@@ -8,11 +8,11 @@
 <div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
 background-size:cover;">
 
-  <div id="pageintro" class="hoc clear">
+  <div id="pageintro" class="container p-3">
     <article>
       <h4 class="heading">Hey {{ request.user.username }}, Your Addresses</h4>
         {% for each_address in all_addresses %}
-            <div class="address_container">
+            <div class="bg-white p-3 shadow-md">
                 <div>
                     <p>
                         {{ each_address.address }}
@@ -23,9 +23,9 @@ background-size:cover;">
                     </p>
                     {% endif %}
                 </div>
-                <div class="button_container">
-                    <button>Edit</button>
-                    <button>Delete</button>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-primary m-1">Edit</button>
+                    <button class="btn btn-danger m-1">Delete</button>
                 </div>
             </div>
         {% endfor %}

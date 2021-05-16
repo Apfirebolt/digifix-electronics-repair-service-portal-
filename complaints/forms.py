@@ -1,10 +1,12 @@
 from django import forms
 from . models import Complaint, ComplaintImages, UserAddress, Comments, UserTestimonials
 from django.core.validators import FileExtensionValidator
-
+from . models import DEVICE_TYPE_CHOICES
 
 class CreateServiceRequestForm(forms.ModelForm):
-
+  description = forms.CharField(label=("Please Enter Description"),
+                             widget=forms.Textarea(attrs={'class': 'form-control'}))
+  device_type = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control'}), choices=DEVICE_TYPE_CHOICES)
   class Meta:
     model = Complaint
     fields = ('description', 'device_type',)
@@ -22,7 +24,7 @@ class ComplaintImageForm(forms.ModelForm):
 
 
 class AddAddressForm(forms.ModelForm):
-  address = forms.CharField(label="Add Address", widget=forms.Textarea)
+  address = forms.CharField(label="Add Address", widget=forms.Textarea(attrs={'class': 'form-control'}))
   is_primary = forms.CheckboxInput()
 
   class Meta:

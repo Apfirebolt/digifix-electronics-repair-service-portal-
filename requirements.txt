@@ -12,10 +12,11 @@ djangorestframework-simplejwt==4.4.0
 idna==2.10
 kiwisolver==1.2.0
 matplotlib==3.3.0
-psycopg2-binary>=2.8
+mysqlclient==2.0.1
 numpy==1.19.0
 pandas==1.0.5
 Pillow==7.2.0
+psycopg2==2.8.6
 PyJWT==1.7.1
 pyparsing==2.4.7
 python-dateutil==2.8.1
