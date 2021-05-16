@@ -10,16 +10,16 @@ class UserRegistrationForm(forms.ModelForm):
     'valid_images': {"Image uploaded is not in valid form, must be in png or jpg format!"}
   }
   password1 = forms.CharField(label=("Password"),
-                              widget=forms.PasswordInput(attrs={'class': 'block'}))
+                              widget=forms.PasswordInput(attrs={'class': 'form-control'}))
   password2 = forms.CharField(label=("Password confirmation"),
-                              widget=forms.PasswordInput(attrs={'class': 'block'}),
+                              widget=forms.PasswordInput(attrs={'class': 'form-control'}),
                               help_text=("Enter the same password as above, for verification."))
   username = forms.CharField(label=("Please Enter Username"),
-                              widget=forms.TextInput)
+                              widget=forms.TextInput(attrs={'class': 'form-control'}))
   email = forms.EmailField(label=("Please Enter Your Email"),
-                             widget=forms.TextInput)
+                             widget=forms.TextInput(attrs={'class': 'form-control'}))
   profile_image = forms.FileField(label=("Please Upload Your Profile Image"),
-                             widget=forms.FileInput, validators=[FileExtensionValidator(['png', 'jpg'])])
+                             widget=forms.FileInput(attrs={'class': 'form-control'}), validators=[FileExtensionValidator(['png', 'jpg'])])
 
   class Meta:
     model = CustomUser

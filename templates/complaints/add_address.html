@@ -5,24 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
-    <h1>Add a New Address for correspondence.</h1>
+<div class="container">
+    <h3 class="text-center my-3 text-success">Add a New Address for correspondence.</h3>
     <div class="content">
       <div id="comments">
-        <p>Please add an address so we can pick the item at your doorstep.</p>
+        <p class="text-center">Please add an address so we can pick the item at your doorstep.</p>
 
-        <form class="form_container" action="" method="post" enctype="multipart/form-data">
+        <form class="auth-form" action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
            {{ form.address.label }}
            {{ form.address }}
 
             <p>Use this as primary address</p>
-           {{ form.is_primary|add_class:"custom_choice" }}
+           {{ form.is_primary|add_class:"form-group" }}
 
-        <div class="button_container">
-            <input type="submit" name="submit" value="Submit Form">
-            <input type="reset" name="reset" value="Reset Form">
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="submit" name="submit" class="m-1 btn btn-success" value="Submit Form">
+            <input type="reset" name="reset" class="m-1 btn btn-danger" value="Reset Form">
         </div>
         {% if form.errors %}
           <ul>

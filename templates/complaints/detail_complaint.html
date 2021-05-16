@@ -8,50 +8,50 @@
 <div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
 background-size:cover;">
 
-  <div id="pageintro" class="hoc clear">
-    <article class="service_request_container">
+  <div class="pb-3">
+    <div>
       <h3 class="heading">Service Request Detail</h3>
-      <p>{{ complaint.description }}</p>
-      <p>This service request is related to a <span class="highlight">{{ complaint.device_type }}</span></p>
-      <p class="highlight">SERVICE STATUS IS {{ complaint.status }}</p>
-      <p class="sub_title">{{ complaint.status_text }} Your reference ID is
-          <span class="highlight">{{ complaint.reference_id }}</span></p>
-      <div class="button_container">
-          <button><a href={% url 'complaints:complaint_update' pk=complaint.id %}>Update</a></button>
-          <button><a href={% url 'complaints:add_images' pk=complaint.id %}>Add Images</a></button>
+      <section class="container bg-white p-3" data-aos="fade-up">
+        <p>{{ complaint.description }}</p>
+        <p>This service request is related to a <span class="highlight">{{ complaint.device_type }}</span></p>
+        <p class="highlight">SERVICE STATUS IS {{ complaint.status }}</p>
+        <p class="sub_title">{{ complaint.status_text }} Your reference ID is
+            <span class="highlight">{{ complaint.reference_id }}</span></p>
+        <div class="d-flex justify-content-center align-item-center">
+          <a href={% url 'complaints:complaint_update' pk=complaint.id %} class="btn m-1 btn-info">Update</a>
+          <a href={% url 'complaints:add_images' pk=complaint.id %} class="btn m-1 btn-success">Add Images</a>
           {% if complaint.status_text %}
-          <button><a href={% url 'complaints:add_comment' pk=complaint.id %}>Add Comment</a></button>
+          <a href={% url 'complaints:add_comment' pk=complaint.id %} class="btn m-1 btn-secondary">Add Comment</a>
           {% endif %}
-      </div>
-    </article>
+        </div>
+      </section>
+    </div>
 
       {% if complaint.all_images.all %}
-          <div class="wrapper row3">
-              <section class="hoc container clear">
-                <div class="sectiontitle">
-                  <h6 class="heading">All Images</h6>
+          <div class="container p-0" data-aos="fade-right"
+          data-aos-offset="300">
+            <h6 class="heading">All Images</h6>
+            <div class="image-container">
+              {% for each_image in complaint.all_images.all %}
+                <div>
+                  <figure>
+                    <img src="{{ each_image.gadget_image.url }}" alt="Image Not available">
+                    <p>{{ each_image.image_description }}</p>
+                  </figure>
+                  <div class="d-flex justify-content-center align-items-center">
+                      <a class="btn btn-success m-1" href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a>
+                      <a class="btn btn-secondary m-1" href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a>
+                      <a class="btn btn-danger m-1" href={% url 'complaints:image_detail' pk=each_image.id %}>View</a>
+                  </div>
                 </div>
-                <div class="image_container">
-                    {% for each_image in complaint.all_images.all %}
-                      <figure class="one_third first">
-                          <img src="{{ each_image.gadget_image.url }}" alt="Image Not available">
-                          <p>{{ each_image.image_description }}</p>
-                      </figure>
-                      <div class="button_container">
-                          <button><a href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a></button>
-                          <button><a href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a></button>
-                          <button><a href={% url 'complaints:image_detail' pk=each_image.id %}>View</a></button>
-                      </div>
-                    {% endfor %}
-
-                </div>
-              </section>
+              {% endfor %}
+            </div>
           </div>
           {% else %}
           <h2>No image has been uploaded for this service request!</h2>
       {% endif %}
 
-   <div class="comments">
+   <div class="comments my-2">
         <h2 align="center">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
         <ul>
           {% for each_comment in complaint.all_thread_comments.all %}

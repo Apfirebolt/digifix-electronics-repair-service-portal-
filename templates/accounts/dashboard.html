@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper row3">
+{% if messages %}
+  {% for message in messages %}
+      <div class="center {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+<div>
   <main class="hoc container clear">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="center alert-info {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
    <h1>Dashboard</h1>
    <p>Hey there {{ request.user.username }}, welcome to the dashboard!</p>
       <img src="{{ request.user.profile_image.url }}" height="400" width="300" alt="Profile Image not available" >
