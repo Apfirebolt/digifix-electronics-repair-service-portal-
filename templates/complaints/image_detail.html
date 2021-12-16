@@ -5,22 +5,77 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
-    <h1>SINGLE IMAGE DETAIL</h1>
-    <div class="content">
-      <div id="comments">
-          <div class="image_container">
-              <img  alt="Image Not available" src={{ complaint_image.gadget_image.url }}>
-          </div>
-          <p>
-              {{ complaint_image.image_description }}
-          </p>
-      </div>
-    </div>
-    <div class="clear"></div>
-  </main>
-</div>
+    <div class="bg-white">
+        <header>
+            <div class="relative bg-white">
+                <div class="absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+                    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+                        <div class="pt-5 pb-6 px-5">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <img class="h-8 w-auto" alt="Image Not available"
+                                         src={{ complaint_image.gadget_image.url }}>
+                                </div>
+                                <div class="-mr-2">
+                                    <button type="button"
+                                            class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                        <span class="sr-only">Close menu</span>
+                                        <!-- Heroicon name: outline/x -->
+                                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                             viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
 
+        <main>
+            <div>
+                <!-- Hero card -->
+                <div class="relative">
+                    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="relative shadow-xl sm:rounded-2xl sm:overflow-hidden">
+                            <div class="absolute inset-0">
+                                <img class="h-full w-full object-cover" alt="Image Not available"
+                                     src={{ complaint_image.gadget_image.url }}>
+                                <div class="absolute inset-0 bg-indigo-400 mix-blend-multiply"></div>
+                            </div>
+                            <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+                                <h1 class="text-center text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                                    <span class="block text-white">Image</span>
+                                    <span class="block text-indigo-200">{{ complaint_image.image_description }}</span>
+                                </h1>
+                                <p class="mt-6 max-w-lg mx-auto text-center text-xl text-indigo-200 sm:max-w-3xl">
+                                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
+                                    cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+                                </p>
+                                <div class="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
+                                    <div class="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
+                                        <a href="#"
+                                           class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8">
+                                            Get started
+                                        </a>
+                                        <a href="#"
+                                           class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8">
+                                            Live demo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More main page content here... -->
+        </main>
+    </div>
 
 {% endblock %}
