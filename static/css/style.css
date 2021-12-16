@@ -110,6 +110,31 @@ input[type=number]:focus,
 	margin-right: 0.25rem;
 }
 
+.dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .dropdown-content {
+	position: absolute;
+	display: none;
+	background-color: #f1f1f1;
+	color: green !important;
+	min-width: 200px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 10;
+	transition: all 0.4s ease-in;
+  }
+
+.dropdown:hover > p {
+	color: blue;
+}  
+
+.dropdown:hover .dropdown-content {
+	display: block;
+	transition: all 0.4s ease-in;
+}
+
 /* Auth Form Styles */
 .auth-form {
 	width: 50%;

@@ -16,6 +16,18 @@
         </li>
       
       {% else %}
+      <li>
+        <a href={% url 'accounts:logout' %} class="dropdown">More
+          <div class="dropdown-content">
+            <ul>
+              <li class="nav-item">
+                <a href={% url 'accounts:login' %}><i class="fa fa-sign-in"></i>Sign In</a>
+              </li>
+            </ul>
+          </div>
+        </a>
+        
+      </li>
       <li class="nav-item">
         <a href={% url 'complaints:create_request' %}>Request Service</a>
       </li>

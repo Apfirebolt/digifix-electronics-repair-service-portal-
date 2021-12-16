@@ -10,6 +10,7 @@ $( document ).ready(function() {
                 'width': '100%',
                 'transition': 'all 1s ease-in-out',
                 'z-index': '1000000',
+                'top': '0'
             });
         } else {
             selectedElement.css({
