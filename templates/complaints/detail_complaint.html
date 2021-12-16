@@ -5,74 +5,157 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
+    <div class="relative bg-indigo-800 p-3">
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover"
+                 src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100"
+                 alt="">
+            <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Complaint Details</h1>
+        </div>
+        <section class="w-3/4 mx-auto bg-white px-3 py-2" data-aos="fade-up">
+
+            <a href="#" class="block hover:bg-gray-50">
+                <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-indigo-600 truncate">{{ complaint.device_type }}</p>
+                            </div>
+                            <div class="hidden md:block">
+                                <div>
+                                    <p class="text-sm text-gray-900">
+                                        {{ complaint.description }}
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                                        <!-- Heroicon name: solid/check-circle -->
+                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                             aria-hidden="true">
+                                            <path fill-rule="evenodd"
+                                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                  clip-rule="evenodd"/>
+                                        </svg>
+                                        Completed phone screening
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                             fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+
+        </section>
+
+    </div>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+
+    <div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
 background-size:cover;">
 
-  <div class="pb-3">
-    <div>
-      <h3 class="heading">Service Request Detail</h3>
-      <section class="container bg-white p-3" data-aos="fade-up">
-        <p>{{ complaint.description }}</p>
-        <p>This service request is related to a <span class="highlight">{{ complaint.device_type }}</span></p>
-        <p class="highlight">SERVICE STATUS IS {{ complaint.status }}</p>
-        <p class="sub_title">{{ complaint.status_text }} Your reference ID is
-            <span class="highlight">{{ complaint.reference_id }}</span></p>
-        <div class="d-flex justify-content-center align-item-center">
-          <a href={% url 'complaints:complaint_update' pk=complaint.id %} class="btn m-1 btn-info">Update</a>
-          <a href={% url 'complaints:add_images' pk=complaint.id %} class="btn m-1 btn-success">Add Images</a>
-          {% if complaint.status_text %}
-          <a href={% url 'complaints:add_comment' pk=complaint.id %} class="btn m-1 btn-secondary">Add Comment</a>
-          {% endif %}
-        </div>
-      </section>
-    </div>
+        <div class="pb-3">
 
-      {% if complaint.all_images.all %}
-          <div class="container p-0" data-aos="fade-right"
-          data-aos-offset="300">
-            <h6 class="heading">All Images</h6>
-            <div class="image-container">
-              {% for each_image in complaint.all_images.all %}
-                <div>
-                  <figure>
-                    <img src="{{ each_image.gadget_image.url }}" alt="Image Not available">
-                    <p>{{ each_image.image_description }}</p>
-                  </figure>
-                  <div class="d-flex justify-content-center align-items-center">
-                      <a class="btn btn-success m-1" href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a>
-                      <a class="btn btn-secondary m-1" href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a>
-                      <a class="btn btn-danger m-1" href={% url 'complaints:image_detail' pk=each_image.id %}>View</a>
-                  </div>
+
+            {% if complaint.all_images.all %}
+                <div class="container p-0" data-aos="fade-right"
+                     data-aos-offset="300">
+                    <div class="image-container">
+
+                        <div class="bg-white">
+                            <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
+                                <div class="space-y-12">
+                                    <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
+                                        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Pictures</h2>
+                                    </div>
+                                    <ul role="list"
+                                        class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
+                                        {% for each_image in complaint.all_images.all %}
+                                            <li>
+                                                <div class="space-y-4">
+                                                    <div class="aspect-w-3 aspect-h-2">
+                                                        <img class="object-cover shadow-lg rounded-lg"
+                                                             src="{{ each_image.gadget_image.url }}"
+                                                             alt="Image Not available">
+                                                    </div>
+                                                </div>
+                                                <div class="my-3">
+                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                       href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a>
+                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-red-400 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                       href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a>
+                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                       href={% url 'complaints:image_detail' pk=each_image.id %}>View</a>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              {% endfor %}
+            {% else %}
+                <h2>No image has been uploaded for this service request!</h2>
+            {% endif %}
+        </div>
+
+<div class="min-h-full">
+  <main class="py-10">
+    <!-- Page header -->
+    <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2">
+      <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+        <!-- Comments-->
+        <section aria-labelledby="notes-title">
+          <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+            <div class="divide-y divide-gray-200">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
+              </div>
+              <div class="px-4 py-6 sm:px-6">
+                <ul role="list" class="space-y-8">
+                    {% for each_comment in complaint.all_thread_comments.all %}
+                        <li>
+                    <div class="flex space-x-3">
+                      <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" src="{{ each_comment.written_by.profile_image.url }}" alt="">
+                      </div>
+                      <div>
+                        <div class="text-sm">
+                          <a href="#" class="font-medium text-gray-900">{{ each_comment.written_by }}</a>
+                        </div>
+                        <div class="mt-1 text-sm text-gray-700">
+                          <p>{{ each_comment.description }}</p>
+                        </div>
+                        <div class="mt-2 text-sm space-x-2">
+                          <span class="text-gray-500 font-medium">{{ each_comment.posted_at }}</span>
+                          <span class="text-gray-500 font-medium">&middot;</span>
+                          <button type="button" class="text-gray-900 font-medium">Reply</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                    {% endfor %}
+
+                </ul>
+              </div>
             </div>
           </div>
-          {% else %}
-          <h2>No image has been uploaded for this service request!</h2>
-      {% endif %}
-
-   <div class="comments my-2">
-        <h2 align="center">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
-        <ul>
-          {% for each_comment in complaint.all_thread_comments.all %}
-          <li>
-            <article>
-              <header>
-                <figure class="avatar"><img src="{{ each_comment.written_by.profile_image.url }}" alt=""></figure>
-                <address>
-                By <a href="#">{{ each_comment.written_by.username }}</a>
-                </address>
-                <p>Posted at {{ each_comment.posted_at }}</p>
-              </header>
-              <div class="content">
-                <p>{{ each_comment.description }}</p>
-              </div>
-            </article>
-          </li>
-          {% endfor %}
-        </ul>
+        </section>
       </div>
-  </div>
-  <!-- Intro ends here -->
+    </div>
+  </main>
 </div>
+        <!-- Intro ends here -->
+    </div>
 {% endblock %}

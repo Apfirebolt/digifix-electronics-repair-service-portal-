@@ -4,7 +4,6 @@ from django.conf.urls.static import static
 from digifix_computer_repair import settings
 from django.views.generic import TemplateView
 
-
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home_page.html'), name='home'),
     path('admin/', admin.site.urls),

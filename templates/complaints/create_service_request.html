@@ -5,37 +5,41 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h3 class="text-success my-3 text-center">CREATE NEW SERVICE REQUEST</h3>
-    <div class="content">
-      <p class="text-center">Please enter the details about the service you need from our side like the name, and type of the
-      device and what problem it is facing, you can add two images for now. But, later more images can be
-      added.</p>
-
-
-      <form class="auth-form" action="" method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-          {{ form.description.label }}
-          {{ form.description }}
-
-          {{ form.device_type.label }}
-          {{ form.device_type|add_class:"custom_select" }}
-
-      <div class="d-flex justify-content-center align-items-center my-3">
-          <input type="submit" name="submit" class="m-1 btn btn-success" value="Submit Form">
-          <input type="reset" name="reset" class="m-1 btn btn-danger" value="Reset Form">
-      </div>
-      {% if form.errors %}
-        <ul>
-          {% for key,value in form.errors.items %}
-            <li>{{ value|escape }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-      <h2>{{ form.errors }}</h2>
-      </form>
+    <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Create A New Service Request
+        </h3>
+        <p>Please enter the details about the service you need from our side like the name, and
+            type of the
+            device and what problem it is facing, you can add two images for now. But, later more images can be
+            added.</p>
     </div>
-  </div>
-</div>
+    <form class="w-1/2 mx-auto my-3" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for each_field in form %}
+            <div>
+                {{ each_field.label }}
+                {{ each_field|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
+            </div>
 
+        {% endfor %}
+
+        <div class="my-3">
+            <input type="submit"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="submit" value="Submit Form">
+            <input type="reset"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="reset" value="Reset Form">
+        </div>
+        {% if form.errors %}
+            <ul>
+                {% for key,value in form.errors.items %}
+                    <li>{{ value|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <h2>{{ form.errors }}</h2>
+    </form>
+    </div>
 {% endblock %}

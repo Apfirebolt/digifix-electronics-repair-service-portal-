@@ -5,79 +5,157 @@
 {% endblock %}
 
 {% block content %}
-{% if messages %}
-  {% for message in messages %}
-      <div class="center {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
-  {% endfor %}
-{% endif %}
-<div>
-  <main class="hoc container clear">
-   <h1>Dashboard</h1>
-   <p>Hey there {{ request.user.username }}, welcome to the dashboard!</p>
-      <img src="{{ request.user.profile_image.url }}" height="400" width="300" alt="Profile Image not available" >
-      {% if request.user.complaints_created.all %}
-      <h3>Status of your applications</h3>
-      <div class="scrollable">
-        <table>
-          <thead>
-            <tr>
-              <th>Created At</th>
-              <th>Device Type</th>
-              <th>Status</th>
-              <th>Detail</th>
-            </tr>
-          </thead>
-          <tbody>
-              {% for each_request in request.user.complaints_created.all %}
-              <tr>
-                  <td>{{ each_request.created_at }}</td>
-                  <td>{{ each_request.device_type }}</td>
-                  <td>{{ each_request.status }}</td>
-                  <td>
-                      <button><a href={% url 'complaints:complaint_detail' pk=each_request.id %}>View Details</a></button>
-                  </td>
-              </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      {% else %}
-      <h3>Hey {{ request.user.username }}, It seems you have no service requests to keep track of.</h3>
-      {% endif %}
-      {% if request.user.all_addresses.all %}
-      <h3>Addresses which you've added!</h3>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="center {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                 role="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <div>
+        <div class="bg-indigo-700">
+            <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    <span class="block">If you have availed our services then why not leave a review ?</span>
+                </h2>
+                <a href={% url 'complaints:create_testimonial' %} class="mt-8 w-full inline-flex items-center
+                   justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600
+                   bg-white hover:bg-indigo-50 sm:w-auto">
+                Leave a Review Here
+                </a>
+            </div>
+        </div>
+        <div class="min-h-full">
+            <main class="py-10">
+                <!-- Page header -->
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+                    <div class="flex items-center space-x-5">
+                        <div class="flex-shrink-0">
+                            <div class="relative">
+                                <img class="h-16 w-16 rounded-full" src="{{ request.user.profile_image.url }}" alt="">
+                                <span class="absolute inset-0 shadow-inner rounded-full" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-900">Hey, {{ request.user.username }}</h1>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="scrollable">
-        <table>
-          <thead>
-            <tr>
-              <th>Address</th>
-              <th>Primary</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for each_address in request.user.all_addresses.all %}
-              <tr>
-                  <td>{{ each_address.address }}</td>
-                  <td>{{ each_address.is_primary }}</td>
-                  <td>
-                      <button><a href={% url 'complaints:address_update' pk=each_address.id %}>Edit</a></button>
-                      <button><a href={% url 'complaints:address_delete' pk=each_address.id %}>Delete</a></button>
-                  </td>
-              </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </div>
-      {% else %}
-          <h3>It seems you've added any address yet!</h3>
-      {% endif %}
-      <p>
-          If you have availed our services then why not leave a review ? ,<a href={% url 'complaints:create_testimonial' %}>
-          Leave a review here</a>
-      </p>
-  </main>
-</div>
+                <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+                    <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+                        <section aria-labelledby="notes-title">
+                            <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+                                <div class="divide-y divide-gray-200">
+                                    <div class="px-4 py-5 sm:px-6">
+                                        <h2 id="notes-title" class="text-lg font-medium text-gray-900">Application
+                                            Status</h2>
+                                    </div>
+                                    <div class="px-4 py-6 sm:px-6">
+                                        <ul role="list" class="space-y-8">
+                                            {% if request.user.complaints_created.all %}
+                                                <table class="min-w-full divide-y divide-gray-200">
+                                                    <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Created At
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Device Type
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Status
+                                                        </th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                            Detail
+                                                        </th>
+                                                        <th scope="col" class="relative px-6 py-3">
+                                                            <span class="sr-only">Edit</span>
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="bg-white divide-y divide-gray-200">
+                                                    {% for each_request in request.user.complaints_created.all %}
+                                                        <tr>
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                                {{ each_request.created_at }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                {{ each_request.device_type }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                {{ each_request.status }}
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                                <button><a
+                                                                        href={% url 'complaints:complaint_detail' pk=each_request.id %}>View
+                                                                    Details</a></button>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    <!-- More people... -->
+                                                    </tbody>
+                                                </table>
+                                            {% else %}
+                                                <h3>Hey {{ request.user.username }}, It seems you have no service
+                                                    requests to keep track of.</h3>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+                        <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
+                            <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Addresses</h2>
+
+                            <!-- Activity Feed -->
+                            <div class="mt-6 flow-root">
+                                <ul role="list" class="-mb-8">
+                                    {% for each_address in request.user.all_addresses.all %}
+                                        <li>
+                                            <div class="relative pb-8">
+                                                <div class="relative flex space-x-3">
+                                                    <div>
+                      <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
+                        <!-- Heroicon name: solid/check -->
+                        <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                             fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clip-rule="evenodd"/>
+                        </svg>
+                      </span>
+                                                    </div>
+                                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                        <div>
+                                                            <p class="text-sm text-gray-500">{{ each_address.address }}</p>
+                                                        </div>
+                                                        <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                            <button><a
+                                                                    href={% url 'complaints:address_update' pk=each_address.id %}>Edit</a>
+                                                            </button>
+                                                            <button><a
+                                                                    href={% url 'complaints:address_delete' pk=each_address.id %}>Delete</a>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
 
 {% endblock %}

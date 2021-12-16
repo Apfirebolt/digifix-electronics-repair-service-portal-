@@ -6,29 +6,40 @@
 {% endblock %}
 
 {% block content %}
-<div class="auth-form">
-  <h3 class="text-center">USER REGISTRATION</h3>
-  <p>Please create an account or login with existing account to register service requests pertaining to
-    your electronic appliances. </p>
+    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Sign up and create a new account
+        </h2></div>
 
-    <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% for each_field in form %}
-        {{ each_field.label }}
-        {{ each_field|add_class:"form-group" }}
-   {% endfor %}
-    <div class="container d-flex justify-content-center">
-        <input type="submit" class="m-1 btn btn-success" name="submit" value="Submit Form">
-        <input type="reset" class="m-1 btn btn-danger" name="reset" value="Reset Form">
-    </div>
-    {% if form.errors %}
-      <ul>
-        {% for key,value in form.errors.items %}
-          <li>{{ value|escape }}</li>
+    <form action="" method="post" enctype="multipart/form-data" class="w-1/3 mx-auto my-3">
+    <p class="my-3">Please create an account or login with existing account to register service requests pertaining to
+                    your electronic appliances. </p>
+        {% csrf_token %}
+        {% for each_field in form %}
+            <div>
+                {{ each_field.label }}
+                {{ each_field|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
+            </div>
+
         {% endfor %}
-      </ul>
-    {% endif %}
-    <h2>{{ form.errors }}</h2>
-  </form> 
-</div>
+        <div class="container d-flex justify-content-center">
+            <input type="submit"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="submit" value="Submit Form">
+            <input type="reset"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="reset" value="Reset Form">
+        </div>
+        {% if form.errors %}
+            <ul>
+                {% for key,value in form.errors.items %}
+                    <li>{{ value|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <h2>{{ form.errors }}</h2>
+    </form>
+        </div>
+    </div>
 {% endblock %}
