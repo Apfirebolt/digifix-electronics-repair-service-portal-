@@ -7,24 +7,31 @@
 
 {% block content %}
 <div class="container">
-    <h3 class="text-center my-3 text-success">CHANGE ACCOUNT SETTINGS</h3>
-    <div class="content">
-      <div id="comments">
-        <p class="text-center">You are modifying your existing account settings, you can change your username, password, email and
+    <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Update Your Profile Settings
+        </h3>
+        <p>You are modifying your existing account settings, you can change your username, password, email and
         profile picture too.</p>
-
-
-        <form action="" method="post" enctype="multipart/form-data" class="auth-form">
+    </div>
+    <form action="" method="post" enctype="multipart/form-data" class="w-1/2 mx-auto my-3">
 
         {% csrf_token %}
           {% for each_field in form %}
-              {{ each_field.label }}
-              {{ each_field|add_class:"form-group" }}
-          {% endfor %}
+            <div>
+                {{ each_field.label }}
+                {{ each_field|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
+            </div>
 
-        <div class="my-2 d-flex justify-content-center align-item-center">
-            <input type="submit" name="submit" class="btn btn-success m-1" value="Update Settings">
-            <input type="reset" name="reset" class="btn btn-danger m-1" value="Reset Form">
+        {% endfor %}
+
+        <div class="my-3">
+            <input type="submit"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="submit" value="Update Settings">
+            <input type="reset"
+                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                   name="reset" value="Reset Form">
         </div>
         {% if form.errors %}
           <ul>
@@ -35,7 +42,5 @@
         {% endif %}
         <h2>{{ form.errors }}</h2>
         </form>
-      </div>
-    </div>
 </div>
 {% endblock %}

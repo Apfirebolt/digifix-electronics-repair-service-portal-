@@ -108,30 +108,54 @@ background-size:cover;">
             {% else %}
                 <h2>No image has been uploaded for this service request!</h2>
             {% endif %}
+        </div>
 
-            <div class="comments my-2">
-                <h2 align="center">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
-                <ul>
+<div class="min-h-full">
+  <main class="py-10">
+    <!-- Page header -->
+    <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2">
+      <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+        <!-- Comments-->
+        <section aria-labelledby="notes-title">
+          <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
+            <div class="divide-y divide-gray-200">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
+              </div>
+              <div class="px-4 py-6 sm:px-6">
+                <ul role="list" class="space-y-8">
                     {% for each_comment in complaint.all_thread_comments.all %}
                         <li>
-                            <article>
-                                <header>
-                                    <figure class="avatar"><img src="{{ each_comment.written_by.profile_image.url }}"
-                                                                alt=""></figure>
-                                    <address>
-                                        By <a href="#">{{ each_comment.written_by.username }}</a>
-                                    </address>
-                                    <p>Posted at {{ each_comment.posted_at }}</p>
-                                </header>
-                                <div class="content">
-                                    <p>{{ each_comment.description }}</p>
-                                </div>
-                            </article>
-                        </li>
+                    <div class="flex space-x-3">
+                      <div class="flex-shrink-0">
+                        <img class="h-10 w-10 rounded-full" src="{{ each_comment.written_by.profile_image.url }}" alt="">
+                      </div>
+                      <div>
+                        <div class="text-sm">
+                          <a href="#" class="font-medium text-gray-900">{{ each_comment.written_by }}</a>
+                        </div>
+                        <div class="mt-1 text-sm text-gray-700">
+                          <p>{{ each_comment.description }}</p>
+                        </div>
+                        <div class="mt-2 text-sm space-x-2">
+                          <span class="text-gray-500 font-medium">{{ each_comment.posted_at }}</span>
+                          <span class="text-gray-500 font-medium">&middot;</span>
+                          <button type="button" class="text-gray-900 font-medium">Reply</button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
                     {% endfor %}
+
                 </ul>
+              </div>
             </div>
-        </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
         <!-- Intro ends here -->
     </div>
 {% endblock %}

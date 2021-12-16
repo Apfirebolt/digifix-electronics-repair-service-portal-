@@ -6,51 +6,50 @@
 
 {% block content %}
     <div class="container">
-        <h3 class="text-center my-3 text-success">Add a New Address for correspondence.</h3>
-        <div class="content">
-            <div id="comments">
-                <p class="text-center">Please add an address so we can pick the item at your doorstep.</p>
-
-                <form class="w-1/2 mx-auto my-3" action="" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div>
-                        {{ form.address.label }}
-                        {{ form.address|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
-                    </div>
-                    <fieldset class="border-t border-b border-gray-200">
-                        <legend class="sr-only">Notifications</legend>
-                        <div class="divide-y divide-gray-200">
-                            <div class="relative flex items-start py-4">
-                                <div class="min-w-0 flex-1 text-sm">
-                                    <label for="comments" class="font-medium text-gray-700">Primary Address</label>
-                                    <p id="comments-description" class="text-gray-500">Use this as primary address</p>
-                                </div>
-                                <div class="ml-3 flex items-center h-5">
-                                    {{ form.is_primary|add_class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" }}
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                    <div class="my-3">
-                        <input type="submit"
-                               class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                               name="submit" value="Submit Form">
-                        <input type="reset"
-                               class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                               name="reset" value="Reset Form">
-                    </div>
-                    {% if form.errors %}
-                        <ul>
-                            {% for key,value in form.errors.items %}
-                                <li>{{ value|escape }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </form>
-            </div>
+        <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Add Address
+            </h3>
+            <p>Add addresses for correspondence, you can add multiple addresses and choose one of them as your primary
+                address</p>
         </div>
-        <div class="clear"></div>
-        </main>
+
+        <form class="w-1/2 mx-auto my-3" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                {{ form.address.label }}
+                {{ form.address|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
+            </div>
+            <fieldset class="border-t border-b border-gray-200">
+                <legend class="sr-only">Notifications</legend>
+                <div class="divide-y divide-gray-200">
+                    <div class="relative flex items-start py-4">
+                        <div class="min-w-0 flex-1 text-sm">
+                            <label for="comments" class="font-medium text-gray-700">Primary Address</label>
+                            <p id="comments-description" class="text-gray-500">Use this as primary address</p>
+                        </div>
+                        <div class="ml-3 flex items-center h-5">
+                            {{ form.is_primary|add_class:"focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" }}
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="my-3">
+                <input type="submit"
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                       name="submit" value="Submit Form">
+                <input type="reset"
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-green-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                       name="reset" value="Reset Form">
+            </div>
+            {% if form.errors %}
+                <ul>
+                    {% for key,value in form.errors.items %}
+                        <li>{{ value|escape }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
     </div>
 
 
