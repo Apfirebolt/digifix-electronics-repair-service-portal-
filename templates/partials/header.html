@@ -1,127 +1,74 @@
-<nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
-  <a href="index.html" class="navbar-brand" href="#">
-    <h1>Digifix Solutions</h1>
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <ul class="navbar-nav">
-      {% if not request.user.is_authenticated %}
-        <li class="nav-item">
-          <a href={% url 'accounts:register' %}><i class="fa fa-user"></i>Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a href={% url 'accounts:login' %}><i class="fa fa-sign-in"></i>Sign In</a>
-        </li>
-      
-      {% else %}
-      <li>
-        <a href={% url 'accounts:logout' %} class="dropdown">More
-          <div class="dropdown-content">
-            <ul>
-              <li class="nav-item">
-                <a href={% url 'accounts:login' %}><i class="fa fa-sign-in"></i>Sign In</a>
-              </li>
-            </ul>
-          </div>
-        </a>
-        
-      </li>
-      <li class="nav-item">
-        <a href={% url 'complaints:create_request' %}>Request Service</a>
-      </li>
-      <li class="nav-item">
-        <a href={% url 'accounts:settings' %}>Change Settings</a>
-      </li>
-      <li class="nav-item">
-        <a href={% url 'complaints:add_address' %}>Add Address</a>
-      </li>
-      <li class="nav-item">
-        <a href={% url 'complaints:all_testimonials' %}>View Testimonials</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
-</nav>
-
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="relative bg-white">
-  <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
-    <div>
-      <a href="#" class="flex">
-        <span class="sr-only">Workflow</span>
-        <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
-      </a>
-    </div>
-    <div class="-mr-2 -my-2 md:hidden">
-      <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
-        <span class="sr-only">Open menu</span>
-        <!-- Heroicon name: outline/menu -->
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
-    </div>
-    <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
-      <nav class="flex space-x-10">
-        <div class="relative">
-          <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-          <button type="button" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
-            <span>Solutions</span>
-            <svg class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-
+    <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
+        <div>
+            <a href="#" class="flex">
+                <span class="sr-only">Workflow</span>
+                <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                     alt="">
+            </a>
         </div>
-        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-          Pricing
-        </a>
-        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-          Docs
-        </a>
-
-        <div class="relative">
-          <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-          <button type="button" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
-            <span>More</span>
-            <svg class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-
+        <div class="hidden md:flex-1 md:flex md:items-center md:justify-between">
+            <nav class="flex space-x-10">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'complaints:create_request' %}"
+                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Request Service
+                    </a>
+                    <a href="{% url 'complaints:add_address' %}"
+                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Add Address
+                    </a>
+                    <a href="{% url 'complaints:all_testimonials' %}"
+                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Testimonials
+                    </a>
+                    <a href="{% url 'accounts:settings' %}"
+                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Settings
+                    </a>
+                    <a href="{% url 'accounts:logout' %}"
+                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Log Out
+                    </a>
+                {% else %}
+                    <div class="flex items-center md:ml-12">
+                        <a href="{% url 'accounts:login' %}"
+                           class="text-base font-medium text-gray-500 hover:text-gray-900">
+                            Sign in
+                        </a>
+                        <a href="{% url 'accounts:register' %}"
+                           class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                            Sign up
+                        </a>
+                    </div>
+                {% endif %}
+            </nav>
         </div>
-      </nav>
-      <div class="flex items-center md:ml-12">
-        <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-          Sign in
-        </a>
-        <a href="#" class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-          Sign up
-        </a>
-      </div>
     </div>
-  </div>
 
-  <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-    <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-      <div class="pt-5 pb-6 px-5">
-        <div class="flex items-center justify-between">
-          <div>
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
-          </div>
-          <div class="-mr-2">
-            <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-              <span class="sr-only">Close menu</span>
-              <!-- Heroicon name: outline/x -->
-              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
+    <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+            <div class="pt-5 pb-6 px-5">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                             alt="Workflow">
+                    </div>
+                    <div class="-mr-2">
+                        <button type="button"
+                                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span class="sr-only">Close menu</span>
+                            <!-- Heroicon name: outline/x -->
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

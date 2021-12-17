@@ -1,28 +1,21 @@
 {% extends 'partials/base.html' %}
 {% load widget_tweaks %}
 {% block title %}
-    Delete Testimonial
+    Confirm Delete Testimonial
 {% endblock %}
 
 {% block content %}
-<div class="wrapper overlay row3">
-    <main class="hoc container clear">
-    <h1>DELETE TESTIMONIAL</h1>
-    <main class="hoc container clear">
-        <h1>Confirm deletion of a previously written testimonial!</h1>
-        <div class="content">
-          <div id="comments">
-            <form method="post">{% csrf_token %}
-                <p>Are you sure you want to delete your testimonial "{{ object.content }}"?</p>
-                <input type="submit" value="Confirm">
-            </form>
-          </div>
+    <form class="bg-white" method="post">{% csrf_token %}
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <span class="block">Confirm Delete?</span>
+                <span class="block text-red-600 text-xl my-2">Are you sure you want to delete "{{ object.content }}"?</span>
+            </h2>
+            <div class="mt-8 flex">
+                <div class="inline-flex rounded-md shadow">
+                    <input type="submit" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-400 hover:bg-red-700 cursor-pointer" value="Confirm">
+                </div>
+            </div>
         </div>
-        <div class="clear"></div>
-    </main>
-    <div class="clear"></div>
-  </main>
-</div>
-
-
+    </form>
 {% endblock %}
