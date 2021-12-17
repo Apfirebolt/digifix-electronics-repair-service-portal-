@@ -13,7 +13,13 @@
             <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Complaint Details</h1>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl mb-3">Complaint Details</h1>
+            <a href="{% url 'complaints:add_images' pk=complaint.id %}" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Add Images
+            </a>
+            {% if not complaint.all_images.all %}
+                <p class="font-extrabold tracking-tight text-white sm:text-3xl my-3">This request does not contain any images</p>
+            {% endif %}
         </div>
         <section class="w-3/4 mx-auto bg-white px-3 py-2" data-aos="fade-up">
 
@@ -105,8 +111,6 @@ background-size:cover;">
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <h2>No image has been uploaded for this service request!</h2>
             {% endif %}
         </div>
 

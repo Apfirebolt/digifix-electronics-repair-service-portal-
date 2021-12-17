@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_save
 from django.utils.crypto import get_random_string
 
 
@@ -79,6 +79,17 @@ class AddAddress(LoginRequiredMixin, FormView):
         address_obj.save()
 
         return HttpResponseRedirect(reverse('complaints:all_addresses'))
+
+
+@receiver(pre_save, sender=UserAddress)
+def check_if_primary_address(sender, instance=None, created=False, **kwargs):
+    # Check if the added address is used as primary address
+    address_instance = instance
+    if address_instance.is_primary:
+        addresses = UserAddress.objects.filter(owner_id=instance.owner_id).exclude(id=address_instance.id)
+        for one_address in addresses:
+            one_address.is_primary = False
+            one_address.save()
 
 
 class AllUserAddresses(LoginRequiredMixin, ListView):
