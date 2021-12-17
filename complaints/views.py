@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View, FormView, DetailView, ListView, UpdateView, DeleteView
 from .forms import ComplaintImageForm, CreateServiceRequestForm, AddAddressForm, AddCommentForm, TestimonialForm
 from django.forms import formset_factory
-from .models import ComplaintImages, Complaint, UserAddress, UserTestimonials
+from .models import ComplaintImages, Complaint, UserAddress, UserTestimonials, Comments
 from django.http import HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
@@ -166,6 +166,35 @@ class AddNewComment(FormView):
         comment_obj.save()
 
         return HttpResponseRedirect(reverse('complaints:complaint_detail', kwargs={'pk': self.kwargs['pk']}))
+
+
+class UpdateComment(LoginRequiredMixin, UpdateView):
+    model = Comments
+    template_name = 'complaints/update_comment.html'
+    form_class = AddCommentForm
+
+    def get_success_url(self):
+        return reverse_lazy('complaints:complaint_detail', kwargs={'pk': self.kwargs['pk']})
+
+    def get_object(self, queryset=None):
+        current_obj = Comments.objects.get(pk=self.kwargs['commentId'])
+        if current_obj.written_by.id != self.request.user.id:
+            raise Http404("You are not authorized to view this page")
+        return current_obj
+
+
+class DeleteComment(LoginRequiredMixin, DeleteView):
+    model = Comments
+    template_name = 'complaints/comment_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('complaints:complaint_detail', kwargs={'pk': self.kwargs['pk']})
+
+    def get_object(self, queryset=None):
+        current_obj = Comments.objects.get(pk=self.kwargs['commentId'])
+        if current_obj.written_by.id != self.request.user.id:
+            raise Http404("You are not authorized to view this page")
+        return current_obj
 
 
 class CreateTestimonial(FormView):

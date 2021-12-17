@@ -5,74 +5,25 @@
 {% endblock %}
 
 {% block content %}
-
-    <section id="hero" class="section" style="background-image:url('../static/images/backgrounds/Automn.jpg');">
-
-        <div class="content">
-            <article>
-                <h1 class="text-3xl font-bold text-red-100 underline">
-                    Hello world!
-                </h1>̥
-                <h3 class="heading">Digifix - Offering Digital solutions since 2002</h3>
-                <p>Digifix is a computer repairing franchise with 11 branches in 6 cities across India</p>
-                <p class="font-x1 uppercase bold">One step solutions to all your IT Problems.</p>
-                <footer><a class="btn" href="#">Customers valued, 100% satisfaction guaranteed!</a></footer>
-            </article>
-        </div>
-
-        <div class="overlay">
-
-        </div>
-        <!-- Intro ends here -->
-    </section>
-
-    <section class="section" id="testimonial">
-        <div class="content">
-            <article>
-                <h3 class="heading">Digifix - Offering Digital solutions since 2002</h3>
-                <p>Digifix is a computer repairing franchise with 11 branches in 6 cities across India</p>
-                <p class="font-x1 uppercase bold">One step solutions to all your IT Problems.</p>
-                <footer><a class="btn" href="#">Customers valued, 100% satisfaction guaranteed!</a></footer>
-            </article>
-        </div>
-    </section>
-
-    <div class="wrapper row3">
-        <div class="hoc container clear">
-            <div class="sectiontitle">
-                <h6 class="heading">Meet our technical experts!</h6>
-            </div>
-            <ul class="nospace group latest">
-                <li class="one_third first">
-                    <article>
-                        <figure><a class="imgover" href="#"><img src="images/demo/320x220.png" alt=""></a></figure>
-                        <div class="txtwrap">
-                            <h4 class="heading"><a href="#">Jason Mcguiro</a></h4>
-                            <ul class="nospace meta">
-                                <li><i class="fa fa-user"></i> <a href="#">Admin</a></li>
-                                <li><i class="fa fa-tag"></i> <a href="#">Operations Team</a></li>
-                            </ul>
-                            <p>He has been serving us for 10 years now, he has a masters degree from University of Texas
-                                [&hellip;]</p>
-                        </div>
-                    </article>
-                </li>
-                <li class="one_third">
-                    <article>
-                        <figure><a class="imgover" href="#"><img src="images/demo/320x220.png" alt=""></a></figure>
-                        <div class="txtwrap">
-                            <h4 class="heading"><a href="#">Tim Berners</a></h4>
-                            <ul class="nospace meta">
-                                <li><i class="fa fa-user"></i> <a href="#">Specialist</a></li>
-                                <li><i class="fa fa-tag"></i> <a href="#">Laptops and Computer Network</a></li>
-                            </ul>
-                            <p>Et dapibus dui in est aliquet ac laoreet vel sollicitudin vel nisl etiam sodales felis
-                                quis purus consequat tempor aenean [&hellip;]</p>
-                        </div>
-                    </article>
-                </li>
-            </ul>
-
-        </div>
+    <div class="relative bg-gray-50">
+  <main class="lg:relative">
+    <div class="mx-auto max-w-7xl w-full pt-16 pb-20 text-center lg:py-48 lg:text-left">
+      <div class="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
+        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+          <span class="block xl:inline">Digifix - Offering Digital solutions since 2002</span>
+          <span class="block text-indigo-600 xl:inline">online business</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
+          Digifix is a computer repairing franchise with 11 branches in 6 cities across India.
+        </p>
+          <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
+              One step solutions to all your IT Problems.
+          </p>
+      </div>
     </div>
+    <div class="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
+      <img class="absolute inset-0 w-full h-full object-cover" src="{% static 'images/backgrounds/Automn.jpg' %}" alt="">
+    </div>
+  </main>
+</div>
 {% endblock %}

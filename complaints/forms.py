@@ -16,7 +16,7 @@ class ComplaintImageForm(forms.ModelForm):
   gadget_image = forms.FileField(label=("Please Upload Your Gadget Image"),
                                   widget=forms.FileInput, validators=[FileExtensionValidator(['png', 'jpg'])])
   image_description = forms.CharField(label=("Please Enter Image Description"),
-                             widget=forms.Textarea)
+                             widget=forms.Textarea(attrs={'class': 'my-3 appearance-none roundedoutline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'}))
 
   class Meta:
     model = ComplaintImages
