@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'widget_tweaks',
+    'rest_framework',
     'accounts',
-    'complaints'
+    'complaints',
+    'api'
 ]
 
 MIDDLEWARE = [
