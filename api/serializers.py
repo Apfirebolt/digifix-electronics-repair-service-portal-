@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages, ReportIssue
 from accounts.models import CustomUser
+from . validators import check_file_size
+from django.core.validators import FileExtensionValidator
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -26,6 +28,7 @@ class ComplaintSerializer(serializers.ModelSerializer):
 
 
 class UserAddressSerializer(serializers.ModelSerializer):
+    owner = CustomUserSerializer(read_only=True)
 
     class Meta:
         model = UserAddress
@@ -34,6 +37,14 @@ class UserAddressSerializer(serializers.ModelSerializer):
 
 
 class UserTestimonialSerializer(serializers.ModelSerializer):
+    # content = serializers.CharField()
+    #
+    # def validate_content(self, value):
+    #     if 'digifix' not in value.lower():
+    #         raise serializers.ValidationError("Your testimonial is not about Digifix")
+    #     return value
+
+    written_by = CustomUserSerializer(read_only=True)
 
     class Meta:
         model = UserTestimonials
@@ -50,10 +61,11 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class ComplaintImageSerializer(serializers.ModelSerializer):
+    gadget_image = serializers.FileField(validators=[check_file_size, FileExtensionValidator(['png', 'jpg', 'jpeg'])])
 
     class Meta:
         model = ComplaintImages
-        fields = '__all__'
+        fields = ['id', 'gadget_image', 'related_complaint', 'image_description']
 
 
 class ReportIssueSerializer(serializers.ModelSerializer):

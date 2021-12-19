@@ -49,7 +49,7 @@
                             <div class="relative lg:flex lg:items-center">
                                 <div class="hidden lg:block lg:flex-shrink-0">
                                     <img class="h-64 w-64 rounded-full xl:h-80 xl:w-80"
-                                         src="/media/{{ each_testimonial.written_by.profile_image }}" alt="">
+                                         src="{{ each_testimonial.written_by.profile_image.url }}" alt="">
                                 </div>
 
                                 <div class="relative lg:ml-10">
@@ -67,8 +67,10 @@
                                         <footer class="mt-8">
                                             <div class="flex">
                                                 <div class="flex-shrink-0 lg:hidden">
-                                                    <img class="h-12 w-12 rounded-full"
+                                                    {% if each_testimonial.written_by.profile_image %}
+                                                        <img class="h-12 w-12 rounded-full"
                                                          src={{ each_testimonial.written_by.profile_image }} alt="">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="ml-4 lg:ml-0">
                                                     <div class="flex">
