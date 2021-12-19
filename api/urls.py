@@ -3,10 +3,12 @@ from django.conf.urls.static import static
 from digifix_computer_repair import settings
 from . views import ( UserAddressApiView, UserTestimonialApiView, CreateCustomUserApiView, ListCustomUsersApiView,
                       ComplaintListApiView, ComplaintCreateApiView, ComplaintUpdateApiView,
-                      AddCommentApiView, UpdateCommentApiView, DestroyCommentApiView, ListCommentApiView,
-                      AddComplaintImageApiView, UpdateComplaintImageApiView, DestroyComplaintImageApiView,
-                      ListComplaintImagesApiView, UserAddressCreateApiView, UserAddressDestroyApiView, UserAddressUpdateApiView,
-                      UserTestimonialCreateApiView, UserTestimonialUpdateApiView, UserTestimonialDestroyApiView,
+                      ReportIssueCreateApiView, ReportIssueUpdateApiView, DestroyReportIssueApiView,
+                      ListReportIssueApiView,  AddCommentApiView, UpdateCommentApiView, DestroyCommentApiView,
+                      ListCommentApiView, AddComplaintImageApiView, UpdateComplaintImageApiView,
+                      DestroyComplaintImageApiView, ListComplaintImagesApiView, UserAddressCreateApiView,
+                      UserAddressDestroyApiView, UserAddressUpdateApiView, UserTestimonialCreateApiView,
+                      UserTestimonialUpdateApiView, UserTestimonialDestroyApiView,
                       ChangeSettingsApiView )
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -18,6 +20,10 @@ urlpatterns = [
     path('complaints', ComplaintListApiView.as_view(), name='complaints'),
     path('complaints/add', ComplaintCreateApiView.as_view(), name='create-complaint'),
     path('complaints/<int:pk>/update', ComplaintUpdateApiView.as_view(), name='update-complaint'),
+    path('complaints/<int:pk>/issues/add', ReportIssueCreateApiView.as_view(), name='add-issues'),
+    path('complaints/<int:pk>/issues/<int:issueId>/update', ReportIssueUpdateApiView.as_view(), name='update-issue'),
+    path('complaints/<int:pk>/issues/<int:issueId>/delete', DestroyReportIssueApiView.as_view(), name='delete-issue'),
+    path('issues', ListReportIssueApiView.as_view(), name='list-issues'),
     path('complaints/<int:pk>/images', AddComplaintImageApiView.as_view(), name='add-images'),
     path('complaints/<int:pk>/images/<int:imageId>/update', UpdateComplaintImageApiView.as_view(), name='update-image'),
     path('complaints/<int:pk>/images/<int:imageId>/delete', DestroyComplaintImageApiView.as_view(), name='delete-image'),

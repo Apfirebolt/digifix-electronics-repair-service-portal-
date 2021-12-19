@@ -3,9 +3,9 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from . serializers import UserAddressSerializer, UserTestimonialSerializer, CustomUserSerializer, \
-    ComplaintSerializer, CommentSerializer, ComplaintImageSerializer
-from . permissions import IsTestimonialOwner, IsAddressOwner, IsComplaintOwner, IsThreadOwner
-from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages
+    ComplaintSerializer, CommentSerializer, ComplaintImageSerializer, ReportIssueSerializer
+from . permissions import IsTestimonialOwner, IsAddressOwner, IsComplaintOwner, IsThreadOwner, IsAssignedEngineer
+from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages, ReportIssue
 from accounts.models import CustomUser
 
 
@@ -126,6 +126,43 @@ class ComplaintUpdateApiView(UpdateAPIView):
     serializer_class = ComplaintSerializer
     queryset = Complaint.objects.all()
     permission_classes = [IsAuthenticated, IsComplaintOwner]
+
+
+class ReportIssueCreateApiView(CreateAPIView):
+    serializer_class = ReportIssueSerializer
+    queryset = ReportIssue.objects.all()
+    permission_classes = [IsAuthenticated, IsAssignedEngineer]
+
+    def perform_create(self, serializer):
+        request = serializer.context['request']
+        serializer.save(written_by_id=request.user.id)
+
+
+class ReportIssueUpdateApiView(UpdateAPIView):
+    serializer_class = ReportIssueSerializer
+    queryset = ReportIssue.objects.all()
+    permission_classes = [IsAuthenticated, IsAssignedEngineer]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.kwargs['issueId'])
+        return obj
+
+
+class DestroyReportIssueApiView(DestroyAPIView):
+    serializer_class = ReportIssueSerializer
+    queryset = ReportIssue.objects.all()
+    permission_classes = [IsAuthenticated, IsAssignedEngineer]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.kwargs['issueId'])
+        return obj
+
+
+class ListReportIssueApiView(ListAPIView):
+    serializer_class = ReportIssueSerializer
+    queryset = ReportIssue.objects.all()
 
 
 class AddCommentApiView(CreateAPIView):

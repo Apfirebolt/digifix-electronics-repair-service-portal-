@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages
+from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages, ReportIssue
 from accounts.models import CustomUser
 
 
@@ -53,5 +53,12 @@ class ComplaintImageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ComplaintImages
+        fields = '__all__'
+
+
+class ReportIssueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ReportIssue
         fields = '__all__'
         read_only_fields = ['written_by']

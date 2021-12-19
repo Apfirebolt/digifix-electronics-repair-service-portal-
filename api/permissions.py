@@ -28,3 +28,10 @@ class IsThreadOwner(permissions.BasePermission):
     def has_permission(self, request, view):
         obj = Complaint.objects.get(pk=view.kwargs['pk'])
         return obj.created_by == request.user
+
+
+class IsAssignedEngineer(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        obj = Complaint.objects.get(pk=view.kwargs['pk'])
+        return obj.assigned_engineer == request.user
