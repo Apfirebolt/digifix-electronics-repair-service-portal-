@@ -4,17 +4,24 @@ from digifix_computer_repair import settings
 from . views import ( UserAddressApiView, UserTestimonialApiView, CreateCustomUserApiView, ListCustomUsersApiView,
                       ComplaintListApiView, ComplaintCreateApiView, ComplaintUpdateApiView,
                       AddCommentApiView, UpdateCommentApiView, DestroyCommentApiView, ListCommentApiView,
-                      UserAddressCreateApiView, UserAddressDestroyApiView, UserAddressUpdateApiView,
-                      UserTestimonialCreateApiView, UserTestimonialUpdateApiView, UserTestimonialDestroyApiView )
+                      AddComplaintImageApiView, UpdateComplaintImageApiView, DestroyComplaintImageApiView,
+                      ListComplaintImagesApiView, UserAddressCreateApiView, UserAddressDestroyApiView, UserAddressUpdateApiView,
+                      UserTestimonialCreateApiView, UserTestimonialUpdateApiView, UserTestimonialDestroyApiView,
+                      ChangeSettingsApiView )
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('signup', CreateCustomUserApiView.as_view(), name='signup'),
     path('signin', obtain_auth_token, name='signin'),
+    path('settings', ChangeSettingsApiView.as_view(), name='settings'),
     path('users', ListCustomUsersApiView.as_view(), name='users'),
     path('complaints', ComplaintListApiView.as_view(), name='complaints'),
     path('complaints/add', ComplaintCreateApiView.as_view(), name='create-complaint'),
     path('complaints/<int:pk>/update', ComplaintUpdateApiView.as_view(), name='update-complaint'),
+    path('complaints/<int:pk>/images', AddComplaintImageApiView.as_view(), name='add-images'),
+    path('complaints/<int:pk>/images/<int:imageId>/update', UpdateComplaintImageApiView.as_view(), name='update-image'),
+    path('complaints/<int:pk>/images/<int:imageId>/delete', DestroyComplaintImageApiView.as_view(), name='delete-image'),
+    path('images', ListComplaintImagesApiView.as_view(), name='list-images'),
     path('complaints/<int:pk>/comments', AddCommentApiView.as_view(), name='add-comment'),
     path('complaints/<int:pk>/comments/<int:commentId>/update', UpdateCommentApiView.as_view(), name='update-comment'),
     path('complaints/<int:pk>/comments/<int:commentId>/delete', DestroyCommentApiView.as_view(), name='delete-comment'),

@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from . serializers import UserAddressSerializer, UserTestimonialSerializer, CustomUserSerializer, \
-    ComplaintSerializer, CommentSerializer
-from . permissions import IsTestimonialOwner, IsAddressOwner, IsComplaintOwner
+    ComplaintSerializer, CommentSerializer, ComplaintImageSerializer
+from . permissions import IsTestimonialOwner, IsAddressOwner, IsComplaintOwner, IsThreadOwner
 from complaints.models import UserAddress, UserTestimonials, Complaint, Comments, ComplaintImages
 from accounts.models import CustomUser
 
@@ -12,6 +12,17 @@ from accounts.models import CustomUser
 class CreateCustomUserApiView(CreateAPIView):
     serializer_class = CustomUserSerializer
     queryset = CustomUser.objects.all()
+
+
+class ChangeSettingsApiView(UpdateAPIView):
+    serializer_class = CustomUserSerializer
+    queryset = CustomUser.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.request.user.id)
+        return obj
 
 
 class ListCustomUsersApiView(ListAPIView):
@@ -153,4 +164,36 @@ class ListCommentApiView(ListAPIView):
     serializer_class = CommentSerializer
     queryset = Comments.objects.all()
 
+
+class AddComplaintImageApiView(CreateAPIView):
+    serializer_class = ComplaintImageSerializer
+    queryset = ComplaintImages.objects.all()
+    permission_classes = [IsAuthenticated, IsThreadOwner]
+
+
+class UpdateComplaintImageApiView(UpdateAPIView):
+    serializer_class = ComplaintImageSerializer
+    queryset = ComplaintImages.objects.all()
+    permission_classes = [IsAuthenticated, IsThreadOwner]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.kwargs['imageId'])
+        return obj
+
+
+class DestroyComplaintImageApiView(DestroyAPIView):
+    serializer_class = ComplaintImageSerializer
+    queryset = ComplaintImages.objects.all()
+    permission_classes = [IsAuthenticated, IsThreadOwner]
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, id=self.kwargs['imageId'])
+        return obj
+
+
+class ListComplaintImagesApiView(ListAPIView):
+    serializer_class = ComplaintImageSerializer
+    queryset = ComplaintImages.objects.all()
 

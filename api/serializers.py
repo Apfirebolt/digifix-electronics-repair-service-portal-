@@ -47,3 +47,11 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comments
         fields = '__all__'
         read_only_fields = ['written_by']
+
+
+class ComplaintImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ComplaintImages
+        fields = '__all__'
+        read_only_fields = ['written_by']
