@@ -206,24 +206,3 @@ footer a:hover {
 /*
 Image Container
 */
-
-.image-container {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	background-color:#a8dadc;
-	color:rgba(50, 50, 93, 0.25);
-	padding: 0.25rem;
-}
-
-.image-container img {
-	width: 350px;
-	height: 320px;
-}
-
-.image-container figure p {
-	color: #081c15;
-	white-space: pre-line;
-	text-align: center;
-	margin: 0.5rem;
-}

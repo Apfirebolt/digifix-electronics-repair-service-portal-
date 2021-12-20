@@ -29,14 +29,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
     USERNAME_FIELD = 'username'
 
-    def remove_all_sessions(self):
-        user_sessions = []
-        all_sessions = Session.objects.filter(expire_date__gte=timezone.now())
-        for session in all_sessions:
-            if str(self.pk) == session.get_decoded().get('_auth_user_id'):
-                user_sessions.append(session.pk)
-        return Session.objects.filter(pk__in=user_sessions).delete()
-
     def __str__(self):
         return self.username
 

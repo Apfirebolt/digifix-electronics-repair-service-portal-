@@ -6,7 +6,7 @@ When you request would be opened by admins, they'd assign you a reference ID and
 
 This project uses custom authentication system in Django made by extending base user class. It has full CRUD functionality on user testimonials and multiple addresses which can be added for correspondence.
 
-This project does not use any popular CSS framework, instead a custom mini framework is created entirely in CSS without using SCSS/SASS.
+This project now uses Tailwind CSS.
 
 ## Getting Started
 
@@ -22,7 +22,24 @@ This project does not use any popular CSS framework, instead a custom mini frame
 ## Built With
 
 * [Python Django](https://www.djangoproject.com/)
-* [HTML + CSS + SCSS](https://www.w3schools.com/html/html_css.asp)
+* [Django Rest Framework](https://www.django-rest-framework.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+
+## API
+
+Until recently it was a stand-alone back-end application created purely in Django with views written in 
+Django using the DTL (Django Templating Language). I've recently written APIS for it using DRF 
+(Django Rest Framework). Having API would allow it to seamlessly connect to a stand-alone front end app written
+in Vue/React/Angular.
+
+There is a separate app which exists only for API end-points. While planning APIs for an existing Django
+app, there could have been multiple approaches. One other popular approach could have been 
+to have separate APIs for each of the existing application within Django app. Each app would 
+have their own separate serializer, permission and views file which is pretty suitable for larger app.
+But, here I have used a single API app which houses permissions, urls, serializers and views for all the applications 
+within this Django app.
+
+Online documentation for the API is created using Postman [here](https://documenter.getpostman.com/view/7768616/UVRAJ7Rz)
 
 ## Authors
 
@@ -34,8 +51,9 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Screenshots
 
-Please find some of the screenshots of the application. Below is the screenshot depicting search pokemon page with
-applied filters.
+Recently, Tailwind CSS and Tailwind components are added to this project which replaced custom CSS
+written on top of Bootstrap. As a result of it, entire UI is changed so I had to reupload
+screenshots for this project which you can find below.
 
 First screenshot of posting a service request.
 

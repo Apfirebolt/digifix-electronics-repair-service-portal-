@@ -13,7 +13,13 @@
             <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Complaint Details</h1>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl mb-3">Complaint Details</h1>
+            <a href="{% url 'complaints:add_images' pk=complaint.id %}" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Add Images
+            </a>
+            {% if not complaint.all_images.all %}
+                <p class="font-extrabold tracking-tight text-white sm:text-3xl my-3">This request does not contain any images</p>
+            {% endif %}
         </div>
         <section class="w-3/4 mx-auto bg-white px-3 py-2" data-aos="fade-up">
 
@@ -105,8 +111,6 @@ background-size:cover;">
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <h2>No image has been uploaded for this service request!</h2>
             {% endif %}
         </div>
 
@@ -119,8 +123,9 @@ background-size:cover;">
         <section aria-labelledby="notes-title">
           <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
             <div class="divide-y divide-gray-200">
-              <div class="px-4 py-5 sm:px-6">
+              <div class="px-4 flex justify-between py-5 sm:px-6">
                 <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
+                  <a href="{% url 'complaints:add_comment' pk=complaint.id %}" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Comment</a>
               </div>
               <div class="px-4 py-6 sm:px-6">
                 <ul role="list" class="space-y-8">
@@ -141,6 +146,10 @@ background-size:cover;">
                           <span class="text-gray-500 font-medium">{{ each_comment.posted_at }}</span>
                           <span class="text-gray-500 font-medium">&middot;</span>
                           <button type="button" class="text-gray-900 font-medium">Reply</button>
+                          {% if request.user.id == each_comment.written_by.id %}
+                              <a href="{% url 'complaints:update_comment' commentId=each_comment.id pk=complaint.id %}" class="text-blue-700 font-medium">Update</a>
+                              <a href="{% url 'complaints:delete_comment' commentId=each_comment.id pk=complaint.id %}" class="text-red-500 font-medium">Delete</a>
+                          {% endif %}
                         </div>
                       </div>
                     </div>

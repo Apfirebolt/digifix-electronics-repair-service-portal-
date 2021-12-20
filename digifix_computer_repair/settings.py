@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
     'widget_tweaks',
+    'rest_framework',
+    'rest_framework.authtoken',
+
     'accounts',
-    'complaints'
+    'complaints',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -120,6 +124,15 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
+}
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 

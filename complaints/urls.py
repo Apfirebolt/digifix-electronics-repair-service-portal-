@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from digifix_computer_repair import settings
 from . views import ( complaints_view, CreateComplaintView, DetailComplaintView, AddAddress,
                       AllUserAddresses, AllServiceRequests, UpdateAddressView, DeleteAddressView
-                      ,UpdateComplaintView, AddRequestImages, AddNewComment, CreateTestimonial, UpdateTestimonial,
+                      ,UpdateComplaintView, AddRequestImages, AddNewComment, UpdateComment, DeleteComment, CreateTestimonial, UpdateTestimonial,
                       ListTestimonials, DeleteTestimonial, SingleImageDelete, SingleImageUpdate, SingleImageDetail )
 
 
@@ -15,6 +15,8 @@ urlpatterns = [
     path('requests', AllServiceRequests.as_view(), name='all_requests'),
     path('images/<int:pk>', AddRequestImages.as_view(), name='add_images'),
     path('comments/<int:pk>', AddNewComment.as_view(), name='add_comment'),
+    path('comments/<int:pk>/update/<int:commentId>', UpdateComment.as_view(), name='update_comment'),
+    path('comments/<int:pk>/delete/<int:commentId>', DeleteComment.as_view(), name='delete_comment'),
     path('detail/<int:pk>', DetailComplaintView.as_view(), name='complaint_detail'),
     path('request/update/<int:pk>', UpdateComplaintView.as_view(), name='complaint_update'),
     path('address/update/<int:pk>', UpdateAddressView.as_view(), name='address_update'),

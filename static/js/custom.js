@@ -1,26 +1,15 @@
-$( document ).ready(function() {
+$(document ).ready(function() {
     // Scroll Position
-
     $(window).scroll(function(){
         let scrollPos = $(document).scrollTop();
-        let selectedElement = $('.navbar');
+        let selectedElement = $('.nav-container');
         if (scrollPos > 100) {
-            selectedElement.css({
-                'position': 'fixed',
-                'width': '100%',
-                'transition': 'all 1s ease-in-out',
-                'z-index': '1000000',
-                'top': '0'
-            });
+            selectedElement.addClass('sticky z-50 top-0 bg-green-100 transition ease-out duration-1000 text-white');
         } else {
-            selectedElement.css({
-                'position': 'relative',
-                'transition': 'all 1s ease-in-out'
-            });
+            selectedElement.removeClass('sticky z-50 top-0 bg-green-100 transition ease-out duration-1000 text-white')
         }
     });
 
     // Initialize AOS
     AOS.init();
-    console.log( "ready!" );
 });
