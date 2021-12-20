@@ -43,7 +43,7 @@ Online documentation for the API is created using Postman [here](https://documen
 
 ## Authors
 
-* **Amit Prafulla (APFirebolt)** - (http://amitprafull.com/)
+* **Amit Prafulla (APFirebolt)** - (http://apgiiit.com/)
 
 ## License
 
@@ -55,30 +55,26 @@ Recently, Tailwind CSS and Tailwind components are added to this project which r
 written on top of Bootstrap. As a result of it, entire UI is changed so I had to reupload
 screenshots for this project which you can find below.
 
-First screenshot of posting a service request.
+Screenshot of posting a service request.
 
-![alt text](./screenshots/service_request1.PNG)
+![alt text](./screenshots/service_request.PNG)
 
-Another Screenshot of the service request page showing images uploaded related to the current service request. Django form sets are used to facilitate uploading several image instances at a time.
+Service Request detail page which shows images and comments which can be added to a service request.
 
-![alt text](./screenshots/service_request2.PNG)
+![alt text](./screenshots/complaint_detail.PNG)
 
-User login page screenshot.
-
-![alt text](./screenshots/user_login.PNG)
-
-Home Page screenshot using custom theme.
-
-![alt text](./screenshots/home_page.PNG)
-
-Screenshot of the dashboard page.
+Dashboard page screenshot.
 
 ![alt text](./screenshots/dashboard.PNG)
 
-Testimonial page where users write reviews and give 1-5 ratings to the service they received.
+As a review for the service received, users can also add testimonials which other 
+users would be able to see. Below is the screenshot for this page.
 
 ![alt text](./screenshots/testimonial.PNG)
 
-Screenshot showing a user changing profile settings from within the app.
+Users can add multiple addresses to their account. Below shows screenshot of the 
+address list page which would display all the addresses of the logged in user.
 
- ![alt text](./screenshots/change_settings.PNG)
+![alt text](./screenshots/address.PNG)
+
+More screenshots might be added in the future.
