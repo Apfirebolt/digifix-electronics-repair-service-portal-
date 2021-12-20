@@ -57,24 +57,24 @@ screenshots for this project which you can find below.
 
 Screenshot of posting a service request.
 
-![alt text](./screenshots/service_request.PNG)
+![alt text](./screenshots/service_request.png)
 
 Service Request detail page which shows images and comments which can be added to a service request.
 
-![alt text](./screenshots/complaint_detail.PNG)
+![alt text](./screenshots/complaint_detail.png)
 
 Dashboard page screenshot.
 
-![alt text](./screenshots/dashboard.PNG)
+![alt text](./screenshots/dashboard.png)
 
 As a review for the service received, users can also add testimonials which other 
 users would be able to see. Below is the screenshot for this page.
 
-![alt text](./screenshots/testimonial.PNG)
+![alt text](./screenshots/testimonial.png)
 
 Users can add multiple addresses to their account. Below shows screenshot of the 
 address list page which would display all the addresses of the logged in user.
 
-![alt text](./screenshots/address.PNG)
+![alt text](./screenshots/address.png)
 
 More screenshots might be added in the future.
