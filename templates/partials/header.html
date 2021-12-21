@@ -1,10 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<div class="relative bg-white nav-container">
+<div class="relative bg-white nav-container transition duration-1000">
     <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
         <div>
             <a href="{% url 'home' %}" class="flex">
                 <span class="sr-only">Workflow</span>
-                <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                <img class="h-8 w-auto sm:h-10 xs:hidden md:block" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                      alt="">
             </a>
         </div>
@@ -55,12 +55,10 @@
         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div class="pt-5 pb-6 px-5">
                 <div class="flex items-center justify-between">
-                    <div>
-                        <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                             alt="Workflow">
-                    </div>
+
                     <div class="-mr-2">
                         <button type="button"
+                                id="close-menu"
                                 class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                             <span class="sr-only">Close menu</span>
                             <!-- Heroicon name: outline/x -->
@@ -70,6 +68,45 @@
                                       d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
+                        <nav class="flex flex-col" id="mobile-nav">
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'complaints:create_request' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Request Service
+                                </a>
+                                <a href="{% url 'accounts:dashboard' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Dashboard
+                                </a>
+                                <a href="{% url 'complaints:add_address' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Add Address
+                                </a>
+                                <a href="{% url 'complaints:all_testimonials' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Testimonials
+                                </a>
+                                <a href="{% url 'accounts:settings' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Settings
+                                </a>
+                                <a href="{% url 'accounts:logout' %}"
+                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                    Log Out
+                                </a>
+                            {% else %}
+                                <div class="flex items-center md:ml-12">
+                                    <a href="{% url 'accounts:login' %}"
+                                       class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                        Sign in
+                                    </a>
+                                    <a href="{% url 'accounts:register' %}"
+                                       class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                                        Sign up
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </nav>
                     </div>
                 </div>
             </div>
