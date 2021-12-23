@@ -7,8 +7,9 @@
 {% block content %}
     {% if messages %}
         {% for message in messages %}
-            <div class="center p-2 {% if message.tags %}alert-{{ message.tags }}{% endif %}"
-                 role="alert">{{ message }}</div>
+            <div class="bg-red-100 text-center border px-4 py-3 rounded relative" role="alert">
+              <span class="block sm:inline">{{ message }}</span>
+            </div>
         {% endfor %}
     {% endif %}
 

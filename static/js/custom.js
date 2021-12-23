@@ -2,7 +2,6 @@ $(document).ready(function() {
     $('#close-menu').click(() => {
         $('#mobile-nav').slideToggle();
     })
-    console.log('Inside jquery ready');
     // Scroll Position
     $(window).scroll(function(){
         let scrollPos = $(document).scrollTop();
