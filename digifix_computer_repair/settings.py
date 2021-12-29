@@ -25,7 +25,7 @@ SECRET_KEY = 'wt@!i+l1l(7jyxe*+*^9t@y94wr*sfm@87-(65$i7io=@@cmy*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://digifix-django.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['digifix-django.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
