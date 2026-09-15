@@ -5,75 +5,117 @@
 {% endblock %}
 
 {% block content %}
+<div class="min-h-[calc(100vh-160px)] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-slate-50/50">
+    
+    <!-- Messages / Alert Area -->
     {% if messages %}
-        {% for message in messages %}
-            <div class="bg-red-100 text-center border px-4 py-3 rounded relative" role="alert">
-              <span class="block sm:inline">{{ message }}</span>
-            </div>
-        {% endfor %}
+        <div class="max-w-md w-full mx-auto mb-6 px-4 sm:px-0">
+            {% for message in messages %}
+                <div class="flex items-center gap-3 p-4 text-sm rounded-xl border border-danger/30 bg-danger/10 text-danger" role="alert">
+                    <svg class="h-5 w-5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
 
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-md w-full space-y-8">
-            <div>
-                <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                     alt="Workflow">
-                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                    Sign in to your account
-                </h2></div>
-            <form class="mt-8 space-y-6" action="" method="POST">
-                <p>Please create an account or login with existing account to register service requests pertaining to
-                    your electronic appliances. </p>
+    <!-- Header & Logo Section -->
+    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center px-4">
+        <div class="inline-flex h-12 w-12 rounded-xl bg-brand items-center justify-center shadow-md shadow-brand/20 mb-4">
+            <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+        </div>
+        <h2 class="text-2xl font-bold tracking-tight text-brand-dark sm:text-3xl">
+            Sign in to your account
+        </h2>
+        <p class="mt-2 text-sm text-slate-600 max-w-sm mx-auto">
+            Manage your appliance service requests, track active visits, and schedule inspections.
+        </p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        <div class="bg-white py-8 px-6 shadow-sm border border-slate-200/80 rounded-2xl sm:px-10">
+            <form class="space-y-5" action="" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="remember" value="true">
-                <div class="rounded-md shadow-sm">
-                    <div>
-                        <label for="username" class="sr-only">Your Username</label>
-                        <input id="username" name="username" type="text" required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                               placeholder="Enter Your Username̥">
-                    </div>
 
-                    <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" size="22"
+                <!-- Username Field -->
+                <div>
+                    <label for="username" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Username
+                    </label>
+                    <div class="relative">
+                        <input id="username" 
+                               name="username" 
+                               type="text" 
                                required
-                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                               placeholder="Password">
-                    </div>
-
-                    <div class="flex items-center justify-between m-4">
-                        <div class="flex items-center">
-                            <input id="remember-me" name="remember-me" type="checkbox"
-                                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
-                            <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div class="text-sm">
-                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                Forgot your password?
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <button type="submit"
-                                class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-            <!-- Heroicon name: solid/lock-closed -->
-            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clip-rule="evenodd"/>
-            </svg>
-          </span>
-                            Sign in
-                        </button>
+                               autocomplete="username"
+                               class="block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-colors"
+                               placeholder="Enter your username">
                     </div>
                 </div>
+
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        Password
+                    </label>
+                    <div class="relative">
+                        <input id="password" 
+                               name="password" 
+                               type="password" 
+                               autocomplete="current-password" 
+                               required
+                               class="block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-colors"
+                               placeholder="••••••••">
+                    </div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center">
+                        <input id="remember-me" 
+                               name="remember-me" 
+                               type="checkbox"
+                               class="h-4 w-4 rounded border-slate-300 text-brand focus:ring-brand/30">
+                        <label for="remember-me" class="ml-2 block text-sm text-slate-600">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-primary hover:text-brand transition-colors">
+                            Forgot password?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit"
+                            class="w-full flex justify-center items-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm hover:shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand">
+                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                        </svg>
+                        Sign in
+                    </button>
+                </div>
             </form>
+
+            <!-- Card Footer / Link to Register -->
+            <div class="mt-6 border-t border-slate-100 pt-5 text-center text-sm text-slate-600">
+                Don't have an account?
+                <a href="{% url 'accounts:register' %}" class="font-semibold text-primary hover:text-brand transition-colors ml-1">
+                    Sign up now
+                </a>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
