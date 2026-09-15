@@ -1,115 +1,139 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="relative bg-white nav-container transition duration-1000">
-    <div class="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
-        <div>
-            <a href="{% url 'home' %}" class="flex">
-                <span class="sr-only">Workflow</span>
-                <img class="h-8 w-auto sm:h-10 xs:hidden md:block" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                     alt="">
+<header class="relative bg-brand-dark border-b border-primary/40 text-slate-200 antialiased transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4 md:space-x-10">
+      
+      <!-- Brand Logo -->
+      <div class="flex justify-start">
+        <a href="{% url 'home' %}" class="flex items-center gap-3 group">
+          <span class="sr-only">Workflow</span>
+          <div class="h-9 w-9 rounded-lg bg-brand flex items-center justify-center shadow-md group-hover:bg-brand-light transition-colors duration-200">
+            <svg class="h-5 w-5 text-white group-hover:text-brand-dark transition-colors duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="text-xl font-bold tracking-tight text-white group-hover:text-brand-light transition-colors">Workflow</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <div class="-mr-2 -my-2 md:hidden">
+        <button type="button" id="open-menu" class="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-primary/40 focus:outline-none focus:ring-2 focus:ring-accent" aria-expanded="false">
+          <span class="sr-only">Open menu</span>
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex md:flex-1 md:items-center md:justify-end md:space-x-1">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'complaints:create_request' %}"
+             class="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200 mr-2">
+            Request Service
+          </a>
+          <a href="{% url 'accounts:dashboard' %}"
+             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-brand-light hover:bg-primary/30 transition-colors">
+            Dashboard
+          </a>
+          <a href="{% url 'complaints:add_address' %}"
+             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-brand-light hover:bg-primary/30 transition-colors">
+            Add Address
+          </a>
+          <a href="{% url 'complaints:all_testimonials' %}"
+             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-brand-light hover:bg-primary/30 transition-colors">
+            Testimonials
+          </a>
+          <a href="{% url 'accounts:settings' %}"
+             class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-brand-light hover:bg-primary/30 transition-colors">
+            Settings
+          </a>
+          <a href="{% url 'accounts:logout' %}"
+             class="ml-2 px-3 py-2 rounded-lg text-sm font-medium text-danger hover:bg-danger/10 transition-colors">
+            Log Out
+          </a>
+        {% else %}
+          <div class="flex items-center space-x-4">
+            <a href="{% url 'accounts:login' %}"
+               class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-brand-light transition-colors">
+              Sign in
             </a>
-        </div>
-        <div class="hidden md:flex-1 md:flex md:items-center md:justify-end">
-            <nav class="flex space-x-10">
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'complaints:create_request' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Request Service
-                    </a>
-                    <a href="{% url 'accounts:dashboard' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Dashboard
-                    </a>
-                    <a href="{% url 'complaints:add_address' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Add Address
-                    </a>
-                    <a href="{% url 'complaints:all_testimonials' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Testimonials
-                    </a>
-                    <a href="{% url 'accounts:settings' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Settings
-                    </a>
-                    <a href="{% url 'accounts:logout' %}"
-                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                        Log Out
-                    </a>
-                {% else %}
-                    <div class="flex items-center md:ml-12">
-                        <a href="{% url 'accounts:login' %}"
-                           class="text-base font-medium text-gray-500 hover:text-gray-900">
-                            Sign in
-                        </a>
-                        <a href="{% url 'accounts:register' %}"
-                           class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                            Sign up
-                        </a>
-                    </div>
-                {% endif %}
-            </nav>
-        </div>
-    </div>
+            <a href="{% url 'accounts:register' %}"
+               class="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200">
+              Sign up
+            </a>
+          </div>
+        {% endif %}
+      </nav>
 
-    <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-        <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-            <div class="pt-5 pb-6 px-5">
-                <div class="flex items-center justify-between">
-
-                    <div class="-mr-2">
-                        <button type="button"
-                                id="close-menu"
-                                class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                            <span class="sr-only">Close menu</span>
-                            <!-- Heroicon name: outline/x -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                        <nav class="flex flex-col" id="mobile-nav">
-                            {% if request.user.is_authenticated %}
-                                <a href="{% url 'complaints:create_request' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Request Service
-                                </a>
-                                <a href="{% url 'accounts:dashboard' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Dashboard
-                                </a>
-                                <a href="{% url 'complaints:add_address' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Add Address
-                                </a>
-                                <a href="{% url 'complaints:all_testimonials' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Testimonials
-                                </a>
-                                <a href="{% url 'accounts:settings' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Settings
-                                </a>
-                                <a href="{% url 'accounts:logout' %}"
-                                   class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                    Log Out
-                                </a>
-                            {% else %}
-                                <div class="flex items-center md:ml-12">
-                                    <a href="{% url 'accounts:login' %}"
-                                       class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                        Sign in
-                                    </a>
-                                    <a href="{% url 'accounts:register' %}"
-                                       class="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-                                        Sign up
-                                    </a>
-                                </div>
-                            {% endif %}
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="hidden absolute top-0 inset-x-0 p-3 transition transform origin-top-right md:hidden z-50">
+    <div class="rounded-xl shadow-2xl bg-brand-dark border border-primary/50 divide-y divide-primary/30">
+      
+      <!-- Drawer Header -->
+      <div class="pt-4 pb-4 px-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="h-8 w-8 rounded-md bg-brand flex items-center justify-center text-white">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            </svg>
+          </div>
+          <span class="font-bold text-white tracking-tight">Workflow</span>
+        </div>
+        <button type="button" id="close-menu" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-primary/40 focus:outline-none focus:ring-2 focus:ring-accent">
+          <span class="sr-only">Close menu</span>
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Drawer Links -->
+      <div class="py-4 px-4 space-y-2">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'complaints:create_request' %}"
+             class="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow transition-colors">
+            Request Service
+          </a>
+          <a href="{% url 'accounts:dashboard' %}"
+             class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-brand-light hover:bg-primary/20 transition-colors">
+            Dashboard
+          </a>
+          <a href="{% url 'complaints:add_address' %}"
+             class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-brand-light hover:bg-primary/20 transition-colors">
+            Add Address
+          </a>
+          <a href="{% url 'complaints:all_testimonials' %}"
+             class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-brand-light hover:bg-primary/20 transition-colors">
+            Testimonials
+          </a>
+          <a href="{% url 'accounts:settings' %}"
+             class="block px-3 py-2 rounded-lg text-base font-medium text-slate-300 hover:text-brand-light hover:bg-primary/20 transition-colors">
+            Settings
+          </a>
+          <a href="{% url 'accounts:logout' %}"
+             class="block px-3 py-2 rounded-lg text-base font-medium text-danger hover:bg-danger/10 transition-colors">
+            Log Out
+          </a>
+        {% else %}
+          <div class="space-y-2 pt-2">
+            <a href="{% url 'accounts:login' %}"
+               class="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 bg-primary/30 hover:text-white transition-colors">
+              Sign in
+            </a>
+            <a href="{% url 'accounts:register' %}"
+               class="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow transition-colors">
+              Sign up
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</header>

@@ -1,0 +1,26 @@
+{
+  "name": "digifix-electronics-repair-service-portal-",
+  "version": "1.0.0",
+  "description": "'Digifix' has an online portal where you can register and ask for a service request mentioning the type of gadget you have in possession which requires to be serviced. You can upload images of the same while registering service request.",
+  "main": "index.js",
+  "scripts": {
+  "tailwind:watch": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch",
+  "tailwind:build": "npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apfirebolt/digifix-electronics-repair-service-portal-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Apfirebolt/digifix-electronics-repair-service-portal-/issues"
+  },
+  "homepage": "https://github.com/Apfirebolt/digifix-electronics-repair-service-portal-#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

@@ -10,3 +10,6 @@ media
 .idea/dictionaries
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
+
+# Ignore node
+node_modules
