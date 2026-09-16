@@ -1,34 +1,76 @@
 {% extends 'partials/base.html' %}
 {% load widget_tweaks %}
+
 {% block title %}
-    Add Comment
+    Digifix - Add Comment
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <div class="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Add Comment
-            </h3>
-            <p>Carry out conversation through comments</p>
+<div class="min-h-[calc(100vh-160px)] bg-slate-50/50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-xl mx-auto">
+
+        <div class="bg-white rounded-t-2xl border border-slate-200/80 border-b-0 px-6 py-6 sm:px-8">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold tracking-tight text-brand-dark">
+                        Post a Comment
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-0.5">
+                        Add an update or communicate directly with the technician handling this ticket.
+                    </p>
+                </div>
+            </div>
         </div>
-        <form class="w-1/2 mx-auto my-3" action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-                {{ form.description|add_class:"my-3 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" }}
-            </div>
-            <div class="my-3">
-                <input type="submit"
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                       name="submit" value="Post Comment">
-            </div>
+
+        <div class="bg-white rounded-b-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm">
+
             {% if form.errors %}
-                <ul>
-                    {% for key,value in form.errors.items %}
-                        <li>{{ value|escape }}</li>
+                <div class="mb-6 p-4 rounded-xl border border-danger/30 bg-danger/10 text-danger text-sm space-y-1">
+                    <p class="font-semibold text-xs uppercase tracking-wider mb-1">Please review the following errors:</p>
+                    {% for key, value in form.errors.items %}
+                        <p class="flex items-center gap-2 text-xs">
+                            <span>&bull;</span> {{ value|escape }}
+                        </p>
                     {% endfor %}
-                </ul>
+                </div>
             {% endif %}
-        </form>
+
+            <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                <div>
+                    <label for="{{ form.description.id_for_label }}" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
+                        {{ form.description.label|default:"Comment Message" }}
+                    </label>
+                    <div class="relative">
+                        {{ form.description|add_class:"block w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-colors" }}
+                    </div>
+                    {% if form.description.help_text %}
+                        <p class="mt-1.5 text-xs text-slate-500">{{ form.description.help_text }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="pt-2 flex items-center gap-3 border-t border-slate-100">
+                    <button type="submit" 
+                            name="submit" 
+                            class="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm hover:shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand">
+                        Post Comment
+                    </button>
+                    
+                    <button type="button" 
+                            onclick="javascript:history.back()" 
+                            class="px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition-colors text-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
     </div>
+</div>
 {% endblock %}

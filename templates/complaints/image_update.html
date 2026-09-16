@@ -1,41 +1,64 @@
 {% extends 'partials/base.html' %}
 {% load widget_tweaks %}
+
 {% block title %}
     Update Image
 {% endblock %}
 
 {% block content %}
 <div class="wrapper overlay row3">
-    <main class="hoc container clear">
+  <main class="hoc container clear">
     <h1>UPDATE IMAGE</h1>
     <div class="content">
       <div id="comments">
         <p>You are about to update a previously uploaded image.</p>
 
-        <form class="form_container" action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% for field in form %}
-            {{ field.label }}
-            {{ field }}
-        {% endfor %}
+        {% if form.instance.image %}
+          <div class="current-preview" style="margin-bottom: 20px;">
+            <p><strong>Current Image:</strong></p>
+            <img src="{{ form.instance.image.url }}" alt="Current upload" style="max-width: 250px; height: auto; border-radius: 4px; display: block; margin-top: 8px;">
+          </div>
+        {% endif %}
 
-        <div class="button_container">
+        <form class="form_container" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-error" style="color: #dc3545; margin-bottom: 15px;">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          {% for field in form %}
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="{{ field.id_for_label }}" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                {{ field.label }}
+                {% if field.field.required %}<span style="color: #dc3545;">*</span>{% endif %}
+              </label>
+
+              {% if field.errors %}
+                {% render_field field class="form-control is-invalid" %}
+                <div class="field-error" style="color: #dc3545; font-size: 0.875rem; margin-top: 4px;">
+                  {{ field.errors|striptags }}
+                </div>
+              {% else %}
+                {% render_field field class="form-control" %}
+              {% endif %}
+
+              {% if field.help_text %}
+                <small class="form-text" style="color: #6c757d; display: block; margin-top: 4px;">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+          <div class="button_container" style="margin-top: 20px;">
             <input type="submit" name="submit" value="Submit Form">
             <input type="reset" name="reset" value="Reset Form">
-        </div>
-        {% if form.errors %}
-          <ul>
-            {% for key,value in form.errors.items %}
-              <li>{{ value|escape }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+          </div>
         </form>
       </div>
     </div>
     <div class="clear"></div>
   </main>
 </div>
-
-
 {% endblock %}
