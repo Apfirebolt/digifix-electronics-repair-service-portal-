@@ -1,28 +1,68 @@
 {% extends 'partials/base.html' %}
 {% load static %}
+
 {% block title %}
-    Digifix - Complete electronix solutions
+    Digifix - Complete Electronic & IT Solutions
 {% endblock %}
 
 {% block content %}
-    <div class="relative bg-gray-50">
-  <main class="lg:relative">
-    <div class="mx-auto max-w-7xl w-full pt-16 pb-20 text-center lg:py-48 lg:text-left">
-      <div class="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
-        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-          <span class="block xl:inline">Digifix -</span>
-          <span class="block text-indigo-600 xl:inline">Offering Digital solutions since 2002</span>
+<div class="relative bg-slate-50 overflow-hidden min-h-[calc(100vh-160px)] flex items-center">
+  <main class="w-full lg:relative">
+    <div class="mx-auto max-w-7xl w-full pt-12 pb-16 text-center lg:py-32 lg:text-left">
+      <div class="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
+        
+        <!-- Category Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/20 text-brand-dark text-xs font-semibold uppercase tracking-wider mb-6">
+          <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+          Reliable Hardware & IT Support
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl tracking-tight font-extrabold text-brand-dark sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl leading-tight">
+          <span class="block">Digifix</span>
+          <span class="block text-brand mt-1">Digital solutions since 2002.</span>
         </h1>
-        <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
-          Digifix is a computer repairing franchise with 11 branches in 6 cities across India.
+
+        <!-- Subtext -->
+        <p class="mt-4 text-base text-slate-600 sm:text-lg md:text-xl max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+          Your one-stop destination for laptop, computer, and electronic appliance diagnostics and repairs.
         </p>
-          <p class="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
-              One step solutions to all your IT Problems.
-          </p>
+
+        <!-- Stats / Proof Points -->
+        <div class="mt-6 flex flex-wrap justify-center lg:justify-start gap-4 text-xs font-medium text-slate-600">
+          <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-xs">
+            <span class="text-brand font-bold">11+</span> Branches
+          </div>
+          <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-xs">
+            <span class="text-brand font-bold">6</span> Cities Across India
+          </div>
+          <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-xs">
+            <span class="text-accent font-bold">20+</span> Years Experience
+          </div>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+          <a href="{% url 'complaints:create_request' %}" 
+             class="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200">
+            Book a Service Request
+          </a>
+          <a href="#about" 
+             class="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-100 transition-colors">
+            Our Centers &rarr;
+          </a>
+        </div>
+
       </div>
     </div>
-    <div class="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
-      <img class="absolute inset-0 w-full h-full object-cover" src="{% static 'images/backgrounds/Automn.jpg' %}" alt="">
+
+    <!-- Hero Image Section -->
+    <div class="relative w-full h-72 sm:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
+      <img class="absolute inset-0 w-full h-full object-cover" 
+           src="{% static 'images/backgrounds/Automn.jpg' %}" 
+           alt="Digifix electronic workstation">
+      <!-- Dark gradient tint over image for depth -->
+      <div class="absolute inset-0 bg-brand-dark/10 lg:bg-transparent"></div>
     </div>
   </main>
 </div>
