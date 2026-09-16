@@ -1,40 +1,126 @@
 {% extends 'partials/base.html' %}
 {% load widget_tweaks %}
+
 {% block title %}
-    Add Service Requests
+    Digifix - Service Requests
 {% endblock %}
 
-<div class="relative bg-indigo-800">
-  <div class="absolute inset-0">
-    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100" alt="">
-    <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
-  </div>
-  <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-    <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Get in touch</h1>
-    <p class="mt-6 text-xl text-indigo-100 max-w-3xl">Mattis amet hendrerit dolor, quisque lorem pharetra. Pellentesque lacus nisi urna, arcu sociis eu. Orci vel lectus nisl eget eget ut consectetur. Sit justo viverra non adipisicing elit distinctio.</p>
-  </div>
-</div>
-
 {% block content %}
-<div class="container">
-    <h1>All Service Requests and their status listed below</h1>
-    <div class="content">
-        {% for each_request in all_requests %}
-            <div class="bg-white p-3">
-                <p>
-                    {{ each_request.description }}
-                </p>
-                <p>{{ each_request.device_type }}</p>
-            <p>{{ each_request.status }}</p>
-            <span>{{ each_request.created_at }}</span>
-                <div class="button_container">
-                    <button>Edit</button>
-                    <button>View Thread</button>
+<div class="bg-slate-50 min-h-[calc(100vh-160px)]">
+
+    <!-- Hero Header -->
+    <div class="relative pb-36 bg-brand-dark overflow-hidden border-b border-primary/40">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 L100 0 L100 100 Z" fill="currentColor" class="text-white" />
+            </svg>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="max-w-2xl">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-semibold uppercase tracking-wider mb-4">
+                        <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+                        Repair Tracker
+                    </span>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
+                        Service Requests
+                    </h1>
+                    <p class="mt-3 text-base text-slate-300 max-w-xl">
+                        Track live technician diagnostic updates, review active appliance complaints, and view ongoing support threads.
+                    </p>
+                </div>
+                <div class="mt-6 md:mt-0 flex-shrink-0">
+                    <a href="{% url 'complaints:create_request' %}"
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow transition-all duration-200">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        New Service Request
+                    </a>
                 </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
+
+    <!-- Overlapping Cards List -->
+    <section class="-mt-24 max-w-7xl mx-auto relative z-10 pb-24 px-4 sm:px-6 lg:px-8" aria-labelledby="requests-heading">
+        <h2 class="sr-only" id="requests-heading">Service Requests Overview</h2>
+
+        {% if all_requests %}
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {% for each_request in all_requests %}
+                    <div class="flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-200">
+                        
+                        <!-- Card Body -->
+                        <div class="p-6 sm:p-8">
+                            <!-- Header Row: Device & Status Badge -->
+                            <div class="flex items-center justify-between gap-3 mb-4">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary">
+                                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                                    </svg>
+                                    {{ each_request.device_type }}
+                                </span>
+
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand/10 text-brand">
+                                    {{ each_request.status }}
+                                </span>
+                            </div>
+
+                            <!-- Problem Description -->
+                            <p class="text-sm text-slate-700 leading-relaxed line-clamp-3">
+                                {{ each_request.description }}
+                            </p>
+
+                            <!-- Date Timestamp -->
+                            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs text-slate-400">
+                                <svg class="h-3.5 w-3.5 mr-1.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+                                    <polyline points="12 6 12 12 16 14" stroke-width="2"></polyline>
+                                </svg>
+                                Filed on {{ each_request.created_at|date:"M d, Y" }}
+                            </div>
+                        </div>
+
+                        <!-- Card Action Buttons -->
+                        <div class="flex items-center justify-between px-6 py-4 bg-slate-50/80 rounded-b-2xl border-t border-slate-100 sm:px-8">
+                            <a href="{% url 'complaints:complaint_detail' pk=each_request.id %}" 
+                               class="text-xs font-semibold text-primary hover:text-brand transition-colors flex items-center gap-1">
+                                View Thread &rarr;
+                            </a>
+                            <a href="{% url 'complaints:complaint_update' pk=each_request.id %}" 
+                               class="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
+                                Edit
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty State -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 p-12 text-center max-w-lg mx-auto shadow-sm">
+                <div class="h-12 w-12 mx-auto rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-4">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3 class="text-base font-bold text-brand-dark">No service requests found</h3>
+                <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+                    You do not have any pending or past service tickets registered.
+                </p>
+                <div class="mt-6">
+                    <a href="{% url 'complaints:create_request' %}"
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200">
+                        + Raise a Request
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </section>
 </div>
-
-
 {% endblock %}
