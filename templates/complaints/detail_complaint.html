@@ -1,170 +1,195 @@
 {% extends 'partials/base.html' %}
+{% load static %}
 
 {% block title %}
-    Complaints Page
+    Digifix - Complaint #{{ complaint.id }} Details
 {% endblock %}
 
 {% block content %}
-    <div class="relative bg-indigo-800 p-3">
-        <div class="absolute inset-0">
-            <img class="w-full h-full object-cover"
-                 src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100"
-                 alt="">
-            <div class="absolute inset-0 bg-indigo-800 mix-blend-multiply" aria-hidden="true"></div>
+<div class="bg-slate-50/50 min-h-[calc(100vh-160px)] pb-24">
+    <div class="relative pb-24 bg-brand-dark overflow-hidden border-b border-primary/40">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 L100 0 L100 100 Z" fill="currentColor" class="text-white" />
+            </svg>
         </div>
-        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl mb-3">Complaint Details</h1>
-            <a href="{% url 'complaints:add_images' pk=complaint.id %}" class="px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Add Images
-            </a>
-            {% if not complaint.all_images.all %}
-                <p class="font-extrabold tracking-tight text-white sm:text-3xl my-3">This request does not contain any images</p>
-            {% endif %}
-        </div>
-        <section class="w-3/4 mx-auto bg-white px-3 py-2" data-aos="fade-up">
 
-            <a href="#" class="block hover:bg-gray-50">
-                <div class="flex items-center px-4 py-4 sm:px-6">
-                    <div class="min-w-0 flex-1 flex items-center">
-                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-                            <div>
-                                <p class="text-sm font-medium text-indigo-600 truncate">{{ complaint.device_type }}</p>
-                            </div>
-                            <div class="hidden md:block">
-                                <div>
-                                    <p class="text-sm text-gray-900">
-                                        {{ complaint.description }}
-                                    </p>
-                                    <p class="mt-2 flex items-center text-sm text-gray-500">
-                                        <!-- Heroicon name: solid/check-circle -->
-                                        <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
-                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                             aria-hidden="true">
-                                            <path fill-rule="evenodd"
-                                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                  clip-rule="evenodd"/>
-                                        </svg>
-                                        Completed phone screening
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+        <div class="relative max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-semibold uppercase tracking-wider">
+                            <span class="h-2 w-2 rounded-full bg-accent animate-pulse"></span>
+                            Ticket #{{ complaint.id }}
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand/20 text-brand-light">
+                            {{ complaint.status|default:"In Review" }}
+                        </span>
                     </div>
-                    <div>
-                        <!-- Heroicon name: solid/chevron-right -->
-                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                             fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd"
-                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                  clip-rule="evenodd"/>
+                    <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+                        Complaint Details
+                    </h1>
+                    <p class="mt-2 text-sm text-slate-300 max-w-xl">
+                        Track diagnosis notes, inspection attachments, and technician communications for this service request.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="{% url 'complaints:add_images' pk=complaint.id %}" 
+                       class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                         </svg>
-                    </div>
+                        Add Images
+                    </a>
+                    <a href="{% url 'complaints:all_requests' %}" 
+                       class="inline-flex items-center px-4 py-2.5 rounded-lg text-sm font-medium text-slate-300 bg-white/10 hover:bg-white/20 hover:text-white transition-colors">
+                        Back to List
+                    </a>
                 </div>
-            </a>
-
-        </section>
-
+            </div>
+        </div>
     </div>
-    <!-- This example requires Tailwind CSS v2.0+ -->
 
-    <div class="overlay" style="background-image:url('../../static/images/gallery/repair.jpg');
-background-size:cover;">
-
-        <div class="pb-3">
-
-
-            {% if complaint.all_images.all %}
-                <div class="container p-0" data-aos="fade-right"
-                     data-aos-offset="300">
-                    <div class="image-container">
-
-                        <div class="bg-white">
-                            <div class="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">
-                                <div class="space-y-12">
-                                    <div class="space-y-5 sm:space-y-4 md:max-w-xl lg:max-w-3xl xl:max-w-none">
-                                        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Pictures</h2>
-                                    </div>
-                                    <ul role="list"
-                                        class="space-y-12 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:space-y-0 lg:grid-cols-3 lg:gap-x-8">
-                                        {% for each_image in complaint.all_images.all %}
-                                            <li>
-                                                <div class="space-y-4">
-                                                    <div class="aspect-w-3 aspect-h-2">
-                                                        <img class="object-cover shadow-lg rounded-lg"
-                                                             src="{{ each_image.gadget_image.url }}"
-                                                             alt="Image Not available">
-                                                    </div>
-                                                </div>
-                                                <div class="my-3">
-                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                       href={% url 'complaints:image_update' pk=each_image.id %}>Edit</a>
-                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-red-400 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                                                       href={% url 'complaints:image_delete' pk=each_image.id %}>Delete</a>
-                                                    <a class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                       href={% url 'complaints:image_detail' pk=each_image.id %}>View</a>
-                                                </div>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <main class="-mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+        <div class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm">
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 pb-6 border-b border-slate-100">
+                <div>
+                    <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Device Type</span>
+                    <h2 class="text-xl font-bold text-brand-dark mt-0.5">{{ complaint.device_type }}</h2>
                 </div>
-            {% endif %}
+                <div class="flex items-center gap-2 text-xs font-medium text-slate-500 bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-100">
+                    <svg class="h-4 w-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Initial intake screening completed
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Issue Description</span>
+                <p class="mt-2 text-slate-700 text-sm sm:text-base leading-relaxed">
+                    {{ complaint.description }}
+                </p>
+            </div>
         </div>
 
-<div class="min-h-full">
-  <main class="py-10">
-    <!-- Page header -->
-    <div class="mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2">
-      <div class="space-y-6 lg:col-start-1 lg:col-span-2">
-        <!-- Comments-->
-        <section aria-labelledby="notes-title">
-          <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
-            <div class="divide-y divide-gray-200">
-              <div class="px-4 flex justify-between py-5 sm:px-6">
-                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments ( {{ complaint.all_thread_comments.all.count }} )</h2>
-                  <a href="{% url 'complaints:add_comment' pk=complaint.id %}" class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add Comment</a>
-              </div>
-              <div class="px-4 py-6 sm:px-6">
-                <ul role="list" class="space-y-8">
-                    {% for each_comment in complaint.all_thread_comments.all %}
-                        <li>
-                    <div class="flex space-x-3">
-                      <div class="flex-shrink-0">
-                        <img class="h-10 w-10 rounded-full" src="{{ each_comment.written_by.profile_image.url }}" alt="">
-                      </div>
-                      <div>
-                        <div class="text-sm">
-                          <a href="#" class="font-medium text-gray-900">{{ each_comment.written_by }}</a>
-                        </div>
-                        <div class="mt-1 text-sm text-gray-700">
-                          <p>{{ each_comment.description }}</p>
-                        </div>
-                        <div class="mt-2 text-sm space-x-2">
-                          <span class="text-gray-500 font-medium">{{ each_comment.posted_at }}</span>
-                          <span class="text-gray-500 font-medium">&middot;</span>
-                          <button type="button" class="text-gray-900 font-medium">Reply</button>
-                          {% if request.user.id == each_comment.written_by.id %}
-                              <a href="{% url 'complaints:update_comment' commentId=each_comment.id pk=complaint.id %}" class="text-blue-700 font-medium">Update</a>
-                              <a href="{% url 'complaints:delete_comment' commentId=each_comment.id pk=complaint.id %}" class="text-red-500 font-medium">Delete</a>
-                          {% endif %}
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                    {% endfor %}
-
-                </ul>
-              </div>
+        <section class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm">
+            <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                <div>
+                    <h3 class="text-lg font-bold text-brand-dark">Attached Photos</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Visual documentation uploaded for this repair ticket</p>
+                </div>
+                <a href="{% url 'complaints:add_images' pk=complaint.id %}" 
+                   class="text-xs font-semibold text-primary hover:text-brand transition-colors">
+                    + Upload Photo
+                </a>
             </div>
-          </div>
+
+            {% with images=complaint.all_images.all %}
+                {% if images %}
+                    <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for each_image in images %}
+                            <div class="group relative rounded-xl border border-slate-200/80 overflow-hidden bg-slate-50 flex flex-col justify-between">
+                                <div class="aspect-w-3 aspect-h-2 w-full overflow-hidden bg-slate-100">
+                                    <img src="{% if each_image.gadget_image %}{{ each_image.gadget_image.url }}{% else %}{% static 'images/placeholder.png' %}{% endif %}"
+                                         alt="Device image"
+                                         class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200">
+                                </div>
+                                <div class="p-3 bg-white border-t border-slate-100 flex items-center justify-end gap-2">
+                                    <a href="{% url 'complaints:image_detail' pk=each_image.id %}" 
+                                       class="px-2.5 py-1 rounded text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors">
+                                        View
+                                    </a>
+                                    <a href="{% url 'complaints:image_update' pk=each_image.id %}" 
+                                       class="px-2.5 py-1 rounded text-xs font-semibold text-primary bg-primary/10 hover:bg-primary hover:text-white transition-colors">
+                                        Edit
+                                    </a>
+                                    <a href="{% url 'complaints:image_delete' pk=each_image.id %}" 
+                                       class="px-2.5 py-1 rounded text-xs font-semibold text-danger bg-danger/10 hover:bg-danger hover:text-white transition-colors">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="py-10 text-center">
+                        <svg class="h-10 w-10 text-slate-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p class="text-xs font-medium text-slate-500">No images have been attached to this ticket yet.</p>
+                    </div>
+                {% endif %}
+            {% endwith %}
         </section>
-      </div>
-    </div>
-  </main>
+
+        <section class="bg-white rounded-2xl border border-slate-200/90 p-6 sm:p-8 shadow-sm">
+            {% with comments=complaint.all_thread_comments.all %}
+                <div class="flex items-center justify-between pb-6 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-lg font-bold text-brand-dark">
+                            Activity & Discussion ({{ comments|length }})
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Technician logs and customer replies</p>
+                    </div>
+                    <a href="{% url 'complaints:add_comment' pk=complaint.id %}" 
+                       class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-brand hover:bg-brand-light hover:text-brand-dark shadow-sm transition-all duration-200">
+                        <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Add Comment
+                    </a>
+                </div>
+
+                <div class="mt-6 space-y-6">
+                    {% for each_comment in comments %}
+                        <div class="flex items-start gap-4 pb-6 {% if not forloop.last %}border-b border-slate-100{% endif %}">
+                            <div class="flex-shrink-0">
+                                {% if each_comment.written_by.profile_image %}
+                                    <img class="h-10 w-10 rounded-full object-cover ring-2 ring-slate-100" 
+                                         src="{{ each_comment.written_by.profile_image.url }}" 
+                                         alt="{{ each_comment.written_by }}">
+                                {% else %}
+                                    <div class="h-10 w-10 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm ring-2 ring-slate-100">
+                                        {{ each_comment.written_by.username|make_list|first|upper }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between gap-2">
+                                    <h4 class="text-sm font-semibold text-brand-dark">{{ each_comment.written_by.username }}</h4>
+                                    <span class="text-xs text-slate-400">{{ each_comment.posted_at|timesince }} ago</span>
+                                </div>
+
+                                <p class="mt-1 text-sm text-slate-700 leading-relaxed">
+                                    {{ each_comment.description }}
+                                </p>
+
+                                {% if request.user == each_comment.written_by %}
+                                    <div class="mt-3 flex items-center gap-3">
+                                        <a href="{% url 'complaints:update_comment' commentId=each_comment.id pk=complaint.id %}" 
+                                           class="text-xs font-semibold text-primary hover:underline">
+                                            Edit
+                                        </a>
+                                        <span class="text-slate-200">&bull;</span>
+                                        <a href="{% url 'complaints:delete_comment' commentId=each_comment.id pk=complaint.id %}" 
+                                           class="text-xs font-semibold text-danger hover:underline">
+                                            Delete
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="py-8 text-center">
+                            <p class="text-xs text-slate-500">No comments posted yet. Leave an update to communicate with the repair team.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endwith %}
+        </section>
+    </main>
 </div>
-        <!-- Intro ends here -->
-    </div>
 {% endblock %}

@@ -1,21 +1,53 @@
 {% extends 'partials/base.html' %}
-{% load widget_tweaks %}
+
 {% block title %}
-    Confirm Delete Testimonial
+    Digifix - Confirm Delete Testimonial
 {% endblock %}
 
 {% block content %}
-    <form class="bg-white" method="post">{% csrf_token %}
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:py-16 lg:px-8 lg:py-20">
-            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                <span class="block">Confirm Delete?</span>
-                <span class="block text-red-600 text-xl my-2">Are you sure you want to delete "{{ object.content }}"?</span>
-            </h2>
-            <div class="mt-8 flex">
-                <div class="inline-flex rounded-md shadow">
-                    <input type="submit" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-400 hover:bg-red-700 cursor-pointer" value="Confirm">
-                </div>
+<div class="min-h-[calc(100vh-160px)] bg-slate-50/50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        
+        <form method="post" class="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm text-center">
+            {% csrf_token %}
+
+            <!-- Warning Icon -->
+            <div class="h-14 w-14 rounded-full bg-danger/10 text-danger flex items-center justify-center mx-auto mb-5">
+                <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
             </div>
-        </div>
-    </form>
+
+            <!-- Title & Notice -->
+            <h2 class="text-xl font-bold tracking-tight text-brand-dark">
+                Delete Testimonial?
+            </h2>
+            <p class="text-xs text-slate-500 mt-1">
+                This action cannot be undone. Your review will be permanently removed from the site.
+            </p>
+
+            <!-- Testimonial Preview -->
+            <div class="my-5 p-4 rounded-xl bg-slate-50 border border-slate-200/70 text-left">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Preview</p>
+                <p class="text-sm text-slate-700 italic line-clamp-3">
+                    “{{ object.content }}”
+                </p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3 pt-2">
+                <button type="submit"
+                        class="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-danger hover:opacity-90 shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger">
+                    Yes, Delete
+                </button>
+
+                <a href="{% url 'complaints:all_testimonials' %}"
+                   class="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 hover:text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
 {% endblock %}
